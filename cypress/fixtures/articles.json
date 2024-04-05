@@ -1,0 +1,39 @@
+{
+  "articles": [
+    {
+      "slug": "Discover-Bondar-Academy-1",
+      "title": "Title 1",
+      "description": "This is a description",
+      "body": "This is a body of the Article",
+      "tagList": [],
+      "createdAt": "2022-12-09T13:46:24.264Z",
+      "updatedAt": "2022-12-09T13:46:24.264Z",
+      "favorited": false,
+      "favoritesCount": 1,
+      "author": {
+        "username": "CyTest.VD",
+        "bio": null,
+        "image": "https://api.realworld.io/images/smiley-cyrus.jpeg",
+        "following": false
+      }
+    },
+    {
+      "slug": "The-value-of-pre-recorded-video-classes-1",
+      "title": "Title 2",
+      "description": "This is a description",
+      "body": "This is a body of the Article",
+      "tagList": [],
+      "createdAt": "2022-12-09T13:46:24.264Z",
+      "updatedAt": "2022-12-09T13:46:24.264Z",
+      "favorited": false,
+      "favoritesCount": 5,
+      "author": {
+        "username": "CyTest.VD",
+        "bio": null,
+        "image": "https://api.realworld.io/images/smiley-cyrus.jpeg",
+        "following": false
+      }
+    }
+  ],
+  "articlesCount": 2
+}
