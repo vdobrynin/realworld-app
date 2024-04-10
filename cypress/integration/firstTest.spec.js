@@ -156,6 +156,7 @@ describe('test with backend', () => {
         expect(response.status).to.equal(201)
       })
 
+      cy.wait(500)
       cy.contains('Global Feed').click()                                                       // #41.2
       cy.get('.article-preview').first().contains('.preview-link', 'Request from API').click()
       cy.get('.article-actions').contains('Delete Article').click()  //use 2nd option to delete 2nd article

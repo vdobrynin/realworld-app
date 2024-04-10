@@ -5,11 +5,15 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "ng build --prod --base-href ./ && cp CNAME dist/CNAME",
     "test": "ng test",
     "lint": "ng lint --force",
+    "e2e": "ng e2e",
     "prepare": "husky install"
   },
+  "pre-commit": [
+    "lint"
+  ],
   "engines": {
     "node": "^18.13.0 || ^20.9.0"
   },
