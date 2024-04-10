@@ -40,11 +40,11 @@ Cypress.Commands.add('loginToApplication', () => {
     //                                               // headless authorization #42
     const userCredentials = {
         "user": {
-            "email": "pwtest60@test.com",
-            "password": "vd12345"
+            "email": Cypress.env("username"),
+            "password": Cypress.env("password")
         }
     }
-    cy.request('POST', 'https://conduit-api.bondaracademy.com/api/users/login', userCredentials)
+    cy.request('POST', Cypress.env('apiUrl+/api/users/login'), userCredentials)
         .its('body').then(body => {
             const token = body.user.token
             cy.wrap(token).as('token')
