@@ -134,7 +134,7 @@ describe('test with backend', () => {
   //     })
   // })
 
-  it('delete a new article in a global feed', () => {                       // #42
+  it.only('delete a new article in a global feed', () => {                       // #42
 
     const bodyRequest = {
       "article": {
@@ -148,7 +148,7 @@ describe('test with backend', () => {
     cy.get('@token').then(token => {
 
       cy.request({                                                                        // 2nd request #41.1
-        url: 'https://conduit-api.bondaracademy.com/api/articles/',
+        url: Cypress.env('apiUrl') + '/api/articles/',
         headers: { 'Authorization': 'Token ' + token },
         method: 'POST',
         body: bodyRequest
@@ -162,7 +162,7 @@ describe('test with backend', () => {
       cy.get('.article-actions').contains('Delete Article').click()  //use 2nd option to delete 2nd article
 
       cy.request({                                                                            // #41.2
-        url: 'https://conduit-api.bondaracademy.com/api/articles?limit=10&offset=0',
+        url: Cypress.env('apiUrl') + '/api/articles?limit=10&offset=0',
         headers: { 'Authorization': 'Token ' + token },
         method: 'GET'
       }).its('body').then(body => {
