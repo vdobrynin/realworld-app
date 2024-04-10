@@ -8,7 +8,7 @@
     "build": "ng build --prod --base-href ./ && cp CNAME dist/CNAME",
     "test": "ng test",
     "lint": "ng lint --force",
-    "e2e": "ng e2e",
+    "e2e": "ng integration",
     "cypress:run": "npx cypress run",
     "cypress:e2e": "start-test start http-get://localhost:4200 cypress:run",
     "prepare": "husky install"
