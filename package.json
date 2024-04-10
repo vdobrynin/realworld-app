@@ -9,6 +9,8 @@
     "test": "ng test",
     "lint": "ng lint --force",
     "e2e": "ng e2e",
+    "cypress:run": "npx cypress run",
+    "cypress:e2e": "start-test start http-get://localhost:4200 cypress:run",
     "prepare": "husky install"
   },
   "pre-commit": [
@@ -50,6 +52,7 @@
     "karma-jasmine-html-reporter": "~2.0.0",
     "lint-staged": "^15.2.0",
     "prettier": "^3.1.1",
+    "start-server-and-test": "^2.0.3",
     "typescript": "~5.2.2"
   },
   "lint-staged": {
