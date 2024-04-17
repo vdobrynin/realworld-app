@@ -6,12 +6,21 @@ module.exports = defineConfig({
   video: false,
   env: {
     username: "pwtest60@test.com",
-    password: "vd12345",
+    password: "",
     apiUrl: "https://conduit-api.bondaracademy.com",
   },
   e2e: {
     setupNodeEvents(on, config) {
       // implement node event listeners here
+      const username = process.env.DB_USERNAME
+      const password = process.env.PASSWORD
+
+      if (!password) {
+        throw new Error(`missing PASSWORD environment variable`)
+      }
+
+      config.env = { username, password }
+      return config
     },
     baseUrl: "https://conduit.bondaracademy.com",
     // baseUrl: "http://localhost:4200",
