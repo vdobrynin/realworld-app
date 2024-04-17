@@ -3,8 +3,7 @@ const { defineConfig } = require("cypress");
 module.exports = defineConfig({
   viewportHeight: 1440,
   viewportWidth: 2560,
-  video: true,  //  // 'false' for do not run
-  // videoCompression: 32,   //  // slower
+  video: false,
   env: {
     username: "pwtest60@test.com",
     password: "vd12345",
