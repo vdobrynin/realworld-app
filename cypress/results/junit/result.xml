@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<testsuites>
+<testsuite name="Root Suite" timestamp="2024-04-22T06:39:45" tests="0" file="cypress/integration/secondTest.spec.js" time="0.000" failures="0"></testsuite>
+<testsuite name="Test log out" timestamp="2024-04-22T06:39:45" tests="1" time="16.962" failures="1">
+  
+  <testcase name="Test log out verify use can log out successfully" time="5.334" classname="verify use can log out successfully">
+    
+    <failure message="Timed out retrying after 4000ms: expected &apos;&lt;ul.nav.navbar-nav.pull-xs-right&gt;&apos; to contain &apos;Sign up1&apos;" type="AssertionError"><![CDATA[AssertionError: Timed out retrying after 4000ms: expected '<ul.nav.navbar-nav.pull-xs-right>' to contain 'Sign up1'
+    at Context.eval (webpack://angular-realworld/./cypress/integration/secondTest.spec.js:11:30)]]></failure>
+    
+  </testcase>
+  
+</testsuite>
+
+<testsuite name="Root Suite" timestamp="2024-04-22T06:39:33" tests="0" file="cypress/integration/firstTest.spec.js" time="0.000" failures="0"></testsuite>
+<testsuite name="test with backend" timestamp="2024-04-22T06:39:33" tests="4" time="10.561" failures="0">
+  
+  <testcase name="test with backend intercepting &amp; modifying the request &amp; response" time="4.381" classname="intercepting &amp; modifying the request &amp; response"></testcase>
+  
+  <testcase name="test with backend verify popular tags are displayed with routing object" time="1.350" classname="verify popular tags are displayed with routing object"></testcase>
+  
+  <testcase name="test with backend verify global feed likes counts" time="2.106" classname="verify global feed likes counts"></testcase>
+  
+  <testcase name="test with backend delete a new article in a global feed" time="2.602" classname="delete a new article in a global feed"></testcase>
+  
+</testsuite>
+
+</testsuites>

@@ -134,7 +134,7 @@ describe('test with backend', () => {
   //     })
   // })
 
-  it.only('delete a new article in a global feed', () => {                       // #42
+  it('delete a new article in a global feed', () => {                       // #42
 
     const bodyRequest = {
       "article": {
