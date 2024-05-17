@@ -1,5 +1,5 @@
 {
-  "name": "angular-realworld",
+  "name": "realworld-app",
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
@@ -38,7 +38,6 @@
     "@angular/router": "17.0.7",
     "@rx-angular/cdk": "17.0.0",
     "@rx-angular/template": "17.0.0",
-    "cypress": "^13.7.2",
     "marked": "^11.1.0",
     "rxjs": "^7.4.0",
     "tslib": "^2.3.0",
@@ -51,6 +50,7 @@
     "@cypress/schematic": "^2.5.1",
     "@types/jasmine": "~4.3.0",
     "@types/marked": "^6.0.0",
+    "cypress": "^13.9.0",
     "cypress-multi-reporters": "^1.6.4",
     "husky": "^8.0.3",
     "jasmine-core": "~4.5.0",
