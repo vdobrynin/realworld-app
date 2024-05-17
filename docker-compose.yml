@@ -1,11 +1,11 @@
 version: '3'
 services:
   cypress_test:
-      image: cypress
+      image: cypress-compose
       build: 
         context: .
         dockerfile: ./Dockerfile
       volumes:
         - ./dockerReports:/app/cypress/results
-        - ./dockerReports:/app/mochawesome-report
+        - ./dockerReports:/app/mochawesome-reports
       command: ["npm", "run", "cypress:e2e"]

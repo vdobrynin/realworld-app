@@ -1,22 +1,22 @@
 <?xml version="1.0"?>
 <testsuites>
-<testsuite name="Root Suite" timestamp="2024-05-17T06:34:07" tests="0" file="cypress/integration/secondTest.spec.js" time="0.000" failures="0"></testsuite>
-<testsuite name="Test log out" timestamp="2024-05-17T06:34:07" tests="1" time="1.226" failures="0">
+<testsuite name="Root Suite" timestamp="2024-05-17T09:41:51" tests="0" file="cypress/integration/secondTest.spec.js" time="0.000" failures="0"></testsuite>
+<testsuite name="Test log out" timestamp="2024-05-17T09:41:51" tests="1" time="1.319" failures="0">
   
-  <testcase name="Test log out verify use can log out successfully" time="1.177" classname="verify use can log out successfully"></testcase>
+  <testcase name="Test log out verify use can log out successfully" time="1.267" classname="verify use can log out successfully"></testcase>
   
 </testsuite>
 
-<testsuite name="Root Suite" timestamp="2024-05-17T06:33:59" tests="0" file="cypress/integration/firstTest.spec.js" time="0.000" failures="0"></testsuite>
-<testsuite name="test with backend" timestamp="2024-05-17T06:33:59" tests="4" time="7.047" failures="0">
+<testsuite name="Root Suite" timestamp="2024-05-17T09:41:41" tests="0" file="cypress/integration/firstTest.spec.js" time="0.000" failures="0"></testsuite>
+<testsuite name="test with backend" timestamp="2024-05-17T09:41:41" tests="4" time="7.332" failures="0">
   
-  <testcase name="test with backend intercepting &amp; modifying the request &amp; response" time="3.412" classname="intercepting &amp; modifying the request &amp; response"></testcase>
+  <testcase name="test with backend intercepting &amp; modifying the request &amp; response" time="3.516" classname="intercepting &amp; modifying the request &amp; response"></testcase>
   
-  <testcase name="test with backend verify popular tags are displayed with routing object" time="0.549" classname="verify popular tags are displayed with routing object"></testcase>
+  <testcase name="test with backend verify popular tags are displayed with routing object" time="0.600" classname="verify popular tags are displayed with routing object"></testcase>
   
-  <testcase name="test with backend verify global feed likes counts" time="0.773" classname="verify global feed likes counts"></testcase>
+  <testcase name="test with backend verify global feed likes counts" time="0.748" classname="verify global feed likes counts"></testcase>
   
-  <testcase name="test with backend delete a new article in a global feed" time="2.221" classname="delete a new article in a global feed"></testcase>
+  <testcase name="test with backend delete a new article in a global feed" time="2.352" classname="delete a new article in a global feed"></testcase>
   
 </testsuite>
 

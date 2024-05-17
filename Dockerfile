@@ -5,15 +5,13 @@ WORKDIR /app
 
 COPY . /app
 
-RUN npm install --force
+RUN npm install
 
-RUN npm install cypress --force
+RUN npm install cypress
 
-RUN npm install --save-dev cypress --force
+RUN npm install --save-dev cypress
 
-RUN npx update-browserslist-db@latest --force
-
-RUN npm update --force
+RUN npm update
 
 RUN npx cypress verify
 # RUN ["npx", "cypress", "verify"]
