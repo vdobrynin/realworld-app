@@ -1,11 +1,15 @@
 version: '3'
 services:
-  cypress_test:
-      image: cypress-compose
-      build: 
-        context: .
-        dockerfile: ./Dockerfile
-      volumes:
-        - ./dockerReports:/app/cypress/results
-        - ./dockerReports:/app/mochawesome-reports
-      command: ["npm", "run", "cypress:e2e"]
+  cypress-test:
+    image: cypress
+    build: 
+      context: .        
+      dockerfile: ./Dockerfile 
+    volumes:
+      - ./dockerReports:/app/cypress/results
+      - ./dockerReports:/app/mochawesome-reports
+    ports:
+      - 4200:4200
+      - 8080:8080
+    command: ["npm", "run", "cypress:e2e"]
+    # network_mode: host

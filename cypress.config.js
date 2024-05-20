@@ -33,7 +33,9 @@ module.exports = defineConfig({
     },
     baseUrl: "https://conduit.bondaracademy.com",
     // baseUrl: "http://localhost:4200",
+    // baseUrl: "http://host.docker.internal:4200",
     specPattern: "cypress/integration/**/*.spec.{js,jsx,ts,tsx}",
     excludeSpecPattern: "**/examples/*",
+    // requestTimeout: 10000,
   },
 });
