@@ -5,9 +5,9 @@
     "passes": 1,
     "pending": 0,
     "failures": 0,
-    "start": "2024-05-20T06:51:44.647Z",
-    "end": "2024-05-20T06:51:46.421Z",
-    "duration": 1774,
+    "start": "2024-05-21T04:37:17.242Z",
+    "end": "2024-05-21T04:37:19.083Z",
+    "duration": 1841,
     "testsRegistered": 1,
     "passPercent": 100,
     "pendingPercent": 0,
@@ -18,7 +18,7 @@
   },
   "results": [
     {
-      "uuid": "7cf5eb31-7c47-4af5-8aca-880309aa9638",
+      "uuid": "9243bbb1-a6a5-4982-a2ac-01c0e61cb1c2",
       "title": "",
       "fullFile": "cypress/integration/secondTest.spec.js",
       "file": "cypress/integration/secondTest.spec.js",
@@ -27,7 +27,7 @@
       "tests": [],
       "suites": [
         {
-          "uuid": "fce68cb0-2ad7-453a-a85e-ea5513ed2a5d",
+          "uuid": "c245ff7a-c8ac-4d67-8ae6-1a1055055690",
           "title": "Test log out",
           "fullFile": "",
           "file": "",
@@ -38,7 +38,7 @@
               "title": "verify use can log out successfully",
               "fullTitle": "Test log out verify use can log out successfully",
               "timedOut": null,
-              "duration": 1687,
+              "duration": 1751,
               "state": "passed",
               "speed": "fast",
               "pass": true,
@@ -47,18 +47,18 @@
               "context": null,
               "code": "cy.contains('Settings').click();\ncy.contains('Or click here to logout').click();\ncy.get('.navbar-nav').should('contain', 'Sign up');",
               "err": {},
-              "uuid": "95e2dd83-ac29-49ff-9d08-7f581c298107",
-              "parentUUID": "fce68cb0-2ad7-453a-a85e-ea5513ed2a5d",
+              "uuid": "c030a61f-81dc-40e5-bbc9-6372e8c4c7ed",
+              "parentUUID": "c245ff7a-c8ac-4d67-8ae6-1a1055055690",
               "isHook": false,
               "skipped": false
             }
           ],
           "suites": [],
-          "passes": ["95e2dd83-ac29-49ff-9d08-7f581c298107"],
+          "passes": ["c030a61f-81dc-40e5-bbc9-6372e8c4c7ed"],
           "failures": [],
           "pending": [],
           "skipped": [],
-          "duration": 1687,
+          "duration": 1751,
           "root": false,
           "rootEmpty": false,
           "_timeout": 2000

@@ -4,16 +4,15 @@ RUN mkdir /app
 WORKDIR /app
 
 COPY . /app
-COPY package.json .
+# COPY package.json .
 
-RUN npm install
+RUN npm install --force
 RUN npm --save-dev install cypress 
-
-RUN npm update && npm upgrade
+RUN npm update
 
 # RUN npx cypress verify
 RUN ["npx", "cypress", "verify"]
 
+RUN npx cypress run 
 # RUN npm run cypress:e2e
-RUN ["npm", "run", "cypress:e2e"]
-# RUN npx cypress run --headless --browser chrome
+# RUN ["npm", "run", "cypress:e2e"]
