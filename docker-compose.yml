@@ -6,8 +6,8 @@ services:
       context: .        
       dockerfile: ./Dockerfile 
     volumes:
-      - ./dockerReports:/app/cypress/results
-      - ./dockerReports:/app/mochawesome-report
+      - ./dockerReports/:/app/cypress/results
+      - ./dockerReports/:/app/mochawesome-report
     ports:
       - 4200:4200
       - 8080:8080
