@@ -8,13 +8,13 @@ describe('test with backend', () => {
     cy.loginToApplication()                  //lecture #37
   })
 
-  it('first', () => {
-    cy.log('Yaaay we logged in')
-  })
+  // it('first', () => {
+  //   cy.log('Yaaay we logged in')
+  // })
   it.only('verify correct request and response', () => {
     //                    //-->put it before an action and verification & save in global variable as alias
     // cy.intercept('POST', '**/articles').as('postArticles')                                         //lecture #40.0
-    // cy.intercept('POST', 'https://conduit-api.bondaracademy.com/api/articles/').as('postArticles') //lecture #39.0
+    cy.intercept('POST', 'https://conduit-api.bondaracademy.com/api/articles/').as('postArticles') //lecture #38
     // //lecture #38
     cy.contains('New Article').click()
     cy.get('[formcontrolname="title"]').type('This is a title')
@@ -22,12 +22,12 @@ describe('test with backend', () => {
     cy.get('[formcontrolname="body"]').type('This is a body of the article')
     cy.contains('Publish Article').click()
 
-    // cy.wait('@postArticles').then(xhr => {
-    //   console.log(xhr)
-    //   expect(xhr.response.statusCode).to.equal(201)
-    //   expect(xhr.request.body.article.body).to.equal('This is a body of the article')   // validation
-    //   expect(xhr.response.body.article.description).to.equal('This is a description') // validation
-    // })
+    cy.wait('@postArticles').then(xhr => { //lecture #38
+      console.log(xhr)
+      expect(xhr.response.statusCode).to.equal(201)
+      expect(xhr.request.body.article.body).to.equal('This is a body of the article')   // validation
+      expect(xhr.response.body.article.description).to.equal('This is a description') // validation
+    })
   })
 
   it('intercepting & modifying the request & response', () => { //-->copy from test above w/renaming & changes //lecture #40.2
