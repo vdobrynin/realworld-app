@@ -16,7 +16,7 @@ describe('test with backend', () => {
     //                    //-->put it before an action and verification & save in global variable as alias
     // cy.intercept('POST', '**/articles').as('postArticles')                                         //lecture #40.0
     cy.intercept('POST', 'https://conduit-api.bondaracademy.com/api/articles/').as('postArticles') //lecture #38
-    // //lecture #38
+    //      //lecture #38
     cy.contains('New Article').click()
     cy.get('[formcontrolname="title"]').type('This is a title')
     cy.get('[formcontrolname="description"]').type('This is a description')
@@ -31,18 +31,48 @@ describe('test with backend', () => {
     })
   })
 
-  it('intercepting & modifying the request & response', () => {//-->copy from test above w/renaming & changes //lecture #40.2
+  it('verify popular tags are displayed with routing object', () => { //lecture #39
+    // cy.log('we are log in')
+    cy.get('.tag-list')
+      .should('contain', 'cypress')
+      .and('contain', 'automation')
+      .and('contain', 'testing')      //--> validate tags
+  })
+
+  it.only('verify global feed likes counts', () => { //lecture #39.1
+    cy.intercept('GET', 'https://conduit-api.bondaracademy.com/api/articles/feed*', { 'articles': [], 'articlesCount': 0 })//#39.1
+    cy.intercept('GET', 'https://conduit-api.bondaracademy.com/api/articles*', { fixture: 'articles.json' })//#39.1
+    // cy.intercept('GET', '**/articles/feed*', { 'articles': [], 'articlesCount': 0 })      //#40
+    // cy.intercept('GET', '**/articles*', { fixture: 'articles.json' })                     //#40
+
+    cy.contains('Global Feed').click()
+    cy.get('app-article-list button').then(heartList => {
+      expect(heartList[0]).to.contain('1')
+      expect(heartList[1]).to.contain('5') //#39.1
+    })
+
+    cy.fixture('articles').then(file => {
+      const articleLink = file.articles[1].slug //#39.1
+      file.articles[1].favoritesCount = 6                            //--> change from 5 to 6
+      cy.intercept('POST', 'https://conduit-api.bondaracademy.com/api/articles/' + articleLink + '/favorite', file)//#39.1
+      // cy.intercept('POST', '**/articles/' + articleLink + '/favorite', file)                //#39.2
+    })
+
+    cy.get('app-article-list button').eq(1).click().should('contain', '6')        // validation
+  })
+
+  it('intercepting & modifying the request & response', () => {//-->copy from test above w/renaming & changes//lecture #40.2
     //                    //-->put it before an action and verification & save in global variable as alias
     // cy.intercept('POST', '**/articles', (req) => {
     //   req.body.article.description = 'This is a description 2'
-    // }).as('postArticles')                                                                 //lecture #40.2
+    // }).as('postArticles')                                                           //lecture #40.2
 
     cy.intercept('POST', '**/articles', (req) => {
       req.reply(res => {
         expect(res.body.article.description).to.equal('This is a description') // validation
         res.body.article.description = 'This is a description 2'
       })
-    }).as('postArticles')                                                               //lecture #40.3
+    }).as('postArticles')                                                              //lecture #40.3
 
     cy.contains('New Article').click()
     cy.get('[formcontrolname="title"]').type('This is a title')
@@ -59,36 +89,6 @@ describe('test with backend', () => {
     })
 
     cy.get('.article-actions').contains('Delete Article').click()// to delete 1st article (I added in #42)
-  })
-
-  it.only('verify popular tags are displayed with routing object', () => { //lecture #39
-    // cy.log('we are log in')
-    cy.get('.tag-list')
-      .should('contain', 'cypress')
-      .and('contain', 'automation')
-      .and('contain', 'testing')      //--> validate tags
-  })
-
-  it('verify global feed likes counts', () => {
-    // cy.intercept('GET', '**/articles/feed*', { 'articles': [], 'articlesCount': 0 })      //#40
-    // cy.intercept('GET', '**/articles*', { fixture: 'articles.json' })                     //#40
-    cy.intercept('GET', 'https://conduit-api.bondaracademy.com/api/articles/feed*', { 'articles': [], 'articlesCount': 0 })//#39.1
-    cy.intercept('GET', 'https://conduit-api.bondaracademy.com/api/articles*', { fixture: 'articles.json' })//#39.1
-
-    cy.contains('Global Feed').click()
-    cy.get('app-article-list button').then(heartList => {
-      expect(heartList[0]).to.contain('1')
-      expect(heartList[1]).to.contain('5')
-    })
-
-    cy.fixture('articles').then(file => {
-      const articleLink = file.articles[1].slug
-      file.articles[1].favoritesCount = 6                                       //--> change from 5 to 6
-      cy.intercept('POST', '**/articles/' + articleLink + '/favorite', file)                             // #40
-      // cy.intercept('POST', 'https://conduit-api.bondaracademy.com/api/articles/' + articleLink + '/favorite', file) // #39.1
-    })
-
-    cy.get('app-article-list button').eq(1).click().should('contain', '6')              // validation
   })
 
   // it('delete a new article in a global feed', () => {                       // #41
