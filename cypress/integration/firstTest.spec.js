@@ -3,15 +3,16 @@ describe('test with backend', () => {
   beforeEach('login to application', () => {
     // cy.intercept({ method: 'GET', path: 'tags' }, { fixture: 'tags.json' })    //lecture #40.1
     // cy.intercept('GET', '**/tags', { fixture: 'tags.json' })               //lecture #40
-    //                                             //lecture #39.0 tags.json object are stubbed bellow
-    // cy.intercept('GET', 'https://conduit-api.bondaracademy.com/api/tags', { fixture: 'tags.json' }) 
+    //                                             //lecture #39 tags.json object are stubbed bellow
+    cy.intercept('GET', 'https://conduit-api.bondaracademy.com/api/tags', { fixture: 'tags.json' })//Lecture#39 
     cy.loginToApplication()                  //lecture #37
   })
 
   // it('first', () => {
   //   cy.log('Yaaay we logged in')
   // })
-  it.only('verify correct request and response', () => {
+
+  it('verify correct request and response', () => {
     //                    //-->put it before an action and verification & save in global variable as alias
     // cy.intercept('POST', '**/articles').as('postArticles')                                         //lecture #40.0
     cy.intercept('POST', 'https://conduit-api.bondaracademy.com/api/articles/').as('postArticles') //lecture #38
@@ -25,12 +26,12 @@ describe('test with backend', () => {
     cy.wait('@postArticles').then(xhr => { //lecture #38
       console.log(xhr)
       expect(xhr.response.statusCode).to.equal(201)
-      expect(xhr.request.body.article.body).to.equal('This is a body of the article')   // validation
+      expect(xhr.request.body.article.body).to.equal('This is a body of the article')  // validation
       expect(xhr.response.body.article.description).to.equal('This is a description') // validation
     })
   })
 
-  it('intercepting & modifying the request & response', () => { //-->copy from test above w/renaming & changes //lecture #40.2
+  it('intercepting & modifying the request & response', () => {//-->copy from test above w/renaming & changes //lecture #40.2
     //                    //-->put it before an action and verification & save in global variable as alias
     // cy.intercept('POST', '**/articles', (req) => {
     //   req.body.article.description = 'This is a description 2'
@@ -60,7 +61,7 @@ describe('test with backend', () => {
     cy.get('.article-actions').contains('Delete Article').click()// to delete 1st article (I added in #42)
   })
 
-  it('verify popular tags are displayed with routing object', () => {
+  it.only('verify popular tags are displayed with routing object', () => { //lecture #39
     // cy.log('we are log in')
     cy.get('.tag-list')
       .should('contain', 'cypress')
@@ -69,11 +70,10 @@ describe('test with backend', () => {
   })
 
   it('verify global feed likes counts', () => {
-
-    cy.intercept('GET', '**/articles/feed*', { 'articles': [], 'articlesCount': 0 })      //#40
-    cy.intercept('GET', '**/articles*', { fixture: 'articles.json' })                     //#40
-    // cy.intercept('GET', 'https://conduit-api.bondaracademy.com/api/articles/feed*', { 'articles': [], 'articlesCount': 0 }) //#39.1
-    // cy.intercept('GET', 'https://conduit-api.bondaracademy.com/api/articles*', { fixture: 'articles.json' }) // #39.1
+    // cy.intercept('GET', '**/articles/feed*', { 'articles': [], 'articlesCount': 0 })      //#40
+    // cy.intercept('GET', '**/articles*', { fixture: 'articles.json' })                     //#40
+    cy.intercept('GET', 'https://conduit-api.bondaracademy.com/api/articles/feed*', { 'articles': [], 'articlesCount': 0 })//#39.1
+    cy.intercept('GET', 'https://conduit-api.bondaracademy.com/api/articles*', { fixture: 'articles.json' })//#39.1
 
     cy.contains('Global Feed').click()
     cy.get('app-article-list button').then(heartList => {
