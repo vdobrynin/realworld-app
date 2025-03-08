@@ -2,7 +2,7 @@
 describe('test with backend', () => {
   beforeEach('login to application', () => {
     //  //                                         //lecture #39 tags.json object are stubbed bellow
-    // cy.intercept('GET', 'https://conduit-api.bondaracademy.com/api/tags', { fixture: 'tags.json' })//Lecture #39 
+    // cy.intercept('GET', 'https://conduit-api.bondaracademy.com/api/tags', { fixture: 'tags.json' })//lecture #39 
     // cy.intercept('GET', '**/tags', { fixture: 'tags.json' })               //lecture #40
     cy.intercept({ method: 'GET', path: 'tags' }, { fixture: 'tags.json' })   //lecture #40.1
     cy.loginToApplication()                  //lecture #37
@@ -14,10 +14,10 @@ describe('test with backend', () => {
 
   it('verify correct request and response', () => {
     //                    //-->put it before an action and verification & save in global variable as alias
-    // cy.intercept('POST', '**/articles').as('postArticles')                                         //lecture #40.0
-    cy.intercept('POST', 'https://conduit-api.bondaracademy.com/api/articles/').as('postArticles') //lecture #38
-    //      //lecture #38
-    cy.contains('New Article').click()
+    // cy.intercept('POST', 'https://conduit-api.bondaracademy.com/api/articles/').as('postArticles')//lecture #38
+    cy.intercept('POST', '**/articles').as('postArticles')                                    //lecture #40
+
+    cy.contains('New Article').click()                            //lecture #38
     cy.get('[formcontrolname="title"]').type('This is a title')
     cy.get('[formcontrolname="description"]').type('This is a description')
     cy.get('[formcontrolname="body"]').type('This is a body of the article')
@@ -31,7 +31,7 @@ describe('test with backend', () => {
     })
   })
 
-  it.only('verify popular tags are displayed with routing object', () => { //lecture #39
+  it('verify popular tags are displayed with routing object', () => { //lecture #39
     // cy.log('we are log in')
     cy.get('.tag-list')
       .should('contain', 'cypress')
@@ -40,10 +40,10 @@ describe('test with backend', () => {
   })
 
   it('verify global feed likes counts', () => { //lecture #39.1
-    cy.intercept('GET', 'https://conduit-api.bondaracademy.com/api/articles/feed*', { 'articles': [], 'articlesCount': 0 })//#39.1
-    cy.intercept('GET', 'https://conduit-api.bondaracademy.com/api/articles*', { fixture: 'articles.json' })//#39.1
-    // cy.intercept('GET', '**/articles/feed*', { 'articles': [], 'articlesCount': 0 })      //#40
-    // cy.intercept('GET', '**/articles*', { fixture: 'articles.json' })                     //#40
+    // cy.intercept('GET', 'https://conduit-api.bondaracademy.com/api/articles/feed*', { 'articles': [], 'articlesCount': 0 })//#39.1
+    // cy.intercept('GET', 'https://conduit-api.bondaracademy.com/api/articles*', { fixture: 'articles.json' })//#39.1
+    cy.intercept('GET', '**/articles/feed*', { 'articles': [], 'articlesCount': 0 })      //#40.1
+    cy.intercept('GET', '**/articles*', { fixture: 'articles.json' })                     //#40.1
 
     cy.contains('Global Feed').click()
     cy.get('app-article-list button').then(heartList => {
@@ -54,14 +54,14 @@ describe('test with backend', () => {
     cy.fixture('articles').then(file => { //#39.1
       const articleLink = file.articles[1].slug
       file.articles[1].favoritesCount = 6                            //--> change from 5 to 6
-      cy.intercept('POST', 'https://conduit-api.bondaracademy.com/api/articles/' + articleLink + '/favorite', file)//#39.1
-      // cy.intercept('POST', '**/articles/' + articleLink + '/favorite', file)                //#39.2
+      // cy.intercept('POST', 'https://conduit-api.bondaracademy.com/api/articles/' + articleLink + '/favorite', file)//#39.1
+      cy.intercept('POST', '**/articles/' + articleLink + '/favorite', file)                //#39.2
     })
 
     cy.get('app-article-list button').eq(1).click().should('contain', '6')        // validation
   })
 
-  it('intercepting & modifying the request & response', () => {//-->copy from test above w/renaming & changes//lecture #40.2
+  it.only('intercepting & modifying the request & response', () => {//-->copy from test above w/renaming & changes//lecture #40.1
     //                    //-->put it before an action and verification & save in global variable as alias
     // cy.intercept('POST', '**/articles', (req) => {
     //   req.body.article.description = 'This is a description 2'
@@ -70,9 +70,9 @@ describe('test with backend', () => {
     cy.intercept('POST', '**/articles', (req) => {
       req.reply(res => {
         expect(res.body.article.description).to.equal('This is a description') // validation
-        res.body.article.description = 'This is a description 2'
+        res.body.article.description = 'This is a description 2'              // reply & modify request
       })
-    }).as('postArticles')                                                              //lecture #40.3
+    }).as('postArticles')                                                   //lecture #40.3
 
     cy.contains('New Article').click()
     cy.get('[formcontrolname="title"]').type('This is a title')
