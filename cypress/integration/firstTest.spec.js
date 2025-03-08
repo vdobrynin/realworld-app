@@ -1,10 +1,10 @@
 
 describe('test with backend', () => {
   beforeEach('login to application', () => {
-    // cy.intercept({ method: 'GET', path: 'tags' }, { fixture: 'tags.json' })    //lecture #40.1
+    //  //                                         //lecture #39 tags.json object are stubbed bellow
+    // cy.intercept('GET', 'https://conduit-api.bondaracademy.com/api/tags', { fixture: 'tags.json' })//Lecture #39 
     // cy.intercept('GET', '**/tags', { fixture: 'tags.json' })               //lecture #40
-    //                                             //lecture #39 tags.json object are stubbed bellow
-    cy.intercept('GET', 'https://conduit-api.bondaracademy.com/api/tags', { fixture: 'tags.json' })//Lecture#39 
+    cy.intercept({ method: 'GET', path: 'tags' }, { fixture: 'tags.json' })   //lecture #40.1
     cy.loginToApplication()                  //lecture #37
   })
 
@@ -31,7 +31,7 @@ describe('test with backend', () => {
     })
   })
 
-  it('verify popular tags are displayed with routing object', () => { //lecture #39
+  it.only('verify popular tags are displayed with routing object', () => { //lecture #39
     // cy.log('we are log in')
     cy.get('.tag-list')
       .should('contain', 'cypress')
@@ -39,7 +39,7 @@ describe('test with backend', () => {
       .and('contain', 'testing')      //--> validate tags
   })
 
-  it.only('verify global feed likes counts', () => { //lecture #39.1
+  it('verify global feed likes counts', () => { //lecture #39.1
     cy.intercept('GET', 'https://conduit-api.bondaracademy.com/api/articles/feed*', { 'articles': [], 'articlesCount': 0 })//#39.1
     cy.intercept('GET', 'https://conduit-api.bondaracademy.com/api/articles*', { fixture: 'articles.json' })//#39.1
     // cy.intercept('GET', '**/articles/feed*', { 'articles': [], 'articlesCount': 0 })      //#40
@@ -51,8 +51,8 @@ describe('test with backend', () => {
       expect(heartList[1]).to.contain('5') //#39.1
     })
 
-    cy.fixture('articles').then(file => {
-      const articleLink = file.articles[1].slug //#39.1
+    cy.fixture('articles').then(file => { //#39.1
+      const articleLink = file.articles[1].slug
       file.articles[1].favoritesCount = 6                            //--> change from 5 to 6
       cy.intercept('POST', 'https://conduit-api.bondaracademy.com/api/articles/' + articleLink + '/favorite', file)//#39.1
       // cy.intercept('POST', '**/articles/' + articleLink + '/favorite', file)                //#39.2
