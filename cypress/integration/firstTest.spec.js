@@ -61,7 +61,7 @@ describe('test with backend', () => {
     cy.get('app-article-list button').eq(1).click().should('contain', '6')        // validation
   })
 
-  it.only('intercepting & modifying the request & response', () => {//-->copy from test above w/renaming & changes//lecture #40.1
+  it('intercepting & modifying the request & response', () => {//-->copy from test above w/renaming & changes//lecture #40.1
     //                    //-->put it before an action and verification & save in global variable as alias
     // cy.intercept('POST', '**/articles', (req) => {
     //   req.body.article.description = 'This is a description 2'
@@ -91,54 +91,54 @@ describe('test with backend', () => {
     cy.get('.article-actions').contains('Delete Article').click()// to delete 1st article (I added in #42)
   })
 
-  // it('delete a new article in a global feed', () => {                       // #41
+  it.only('delete a new article in a global feed', () => {                       // #41
+    const userCredentials = {
+      "user": {
+        "email": "pwtest60@test.com",
+        "password": "vd12345"
+      }
+    }
 
-  //   const userCredentials = {
-  //     "user": {
-  //       "email": "pwtest60@test.com",
-  //       "password": "vd12345"
-  //     }
-  //   }
+    const bodyRequest = {
+      "article": {
+        "title": "Request from API",
+        "description": "API testing is easy",
+        "body": "Angular is cool",
+        "tagList": []
+      }
+    }
+    //                                                                           // 1st request #41.1
+    cy.request('POST', 'https://conduit-api.bondaracademy.com/api/users/login', userCredentials)
+      .its('body').then(body => {
+        const token = body.user.token
 
-  //   const bodyRequest = {
-  //     "article": {
-  //       "title": "Request from API",
-  //       "description": "API testing is easy",
-  //       "body": "Angular is cool",
-  //       "tagList": []
-  //     }
-  //   }
-  //   //                                                                                      // 1st request #41.1
-  //   cy.request('POST', 'https://conduit-api.bondaracademy.com/api/users/login', userCredentials)
-  //     .its('body').then(body => {
-  //       const token = body.user.token
+        cy.request({                                                            // 2nd request #41.1
+          url: 'https://conduit-api.bondaracademy.com/api/articles/',
+          headers: { 'Authorization': 'Token ' + token },
+          method: 'POST',
+          body: bodyRequest
+        }).then(response => {
+          expect(response.status).to.equal(201)
+        })
 
-  //       cy.request({                                                                        // 2nd request #41.1
-  //         url: 'https://conduit-api.bondaracademy.com/api/articles/',
-  //         headers: { 'Authorization': 'Token ' + token },
-  //         method: 'POST',
-  //         body: bodyRequest
-  //       }).then(response => {
-  //         expect(response.status).to.equal(201)
-  //       })
+        // cy.wait(300)
+        cy.contains('Global Feed').click()            // delete article through UI   // #41.2
+        // cy.get('.article-preview').first().click()
+        cy.get('.article-preview').first().contains('.preview-link', 'Request from API').click()
+        cy.get('.article-actions').contains('Delete Article').click() //using 2nd option to delete 2nd article
 
-  //       cy.contains('Global Feed').click()                                                       // #41.2
-  //       cy.get('.article-preview').first().contains('.preview-link', 'Request from API').click()
-  //       cy.get('.article-actions').contains('Delete Article').click()  //use 2nd option to delete 2nd article
-
-  //       cy.request({                                                                            // #41.2
-  //         url: 'https://conduit-api.bondaracademy.com/api/articles?limit=10&offset=0',
-  //         headers: { 'Authorization': 'Token ' + token },
-  //         method: 'GET'
-  //       }).its('body').then(body => {
-  //         // console.log(body)
-  //         expect(body.articles[0].title).not.to.equal('Request from API')
-  //       })
-  //     })
-  // })
+        cy.request({                                                       // #41.3
+          url: 'https://conduit-api.bondaracademy.com/api/articles?limit=10&offset=0',
+          headers: { 'Authorization': 'Token ' + token },
+          method: 'GET'
+        }).its('body').then(body => {
+          // console.log(body)
+          expect(body.articles[0].title).not.to.equal('Request from API')
+        })
+      })
+  })
 
   it('delete a new article in a global feed', () => {                       // #42
-
     const bodyRequest = {
       "article": {
         "title": "Request from API",
@@ -149,7 +149,6 @@ describe('test with backend', () => {
     }
     //                                                                                      // 1st request #41.1
     cy.get('@token').then(token => {
-
       cy.request({                                                                        // 2nd request #41.1
         url: Cypress.env('apiUrl') + '/api/articles/',
         headers: { 'Authorization': 'Token ' + token },
@@ -159,8 +158,9 @@ describe('test with backend', () => {
         expect(response.status).to.equal(201)
       })
 
-      cy.wait(500)
+      // cy.wait(300)
       cy.contains('Global Feed').click()                                                       // #41.2
+      // cy.get('.article-preview').first().click()
       cy.get('.article-preview').first().contains('.preview-link', 'Request from API').click()
       cy.get('.article-actions').contains('Delete Article').click()  //use 2nd option to delete 2nd article
 
