@@ -121,7 +121,6 @@ describe('test with backend', () => {
           expect(response.status).to.equal(201)
         })
 
-        // cy.wait(300)
         cy.contains('Global Feed').click()            // delete article through UI   // #41.2
         // cy.get('.article-preview').first().click()
         cy.get('.article-preview').first().contains('.preview-link', 'Request from API').click()
@@ -136,42 +135,5 @@ describe('test with backend', () => {
           expect(body.articles[0].title).not.to.equal('Request from API')
         })
       })
-  })
-
-  it('delete a new article in a global feed', () => {                       // #42
-    const bodyRequest = {
-      "article": {
-        "title": "Request from API",
-        "description": "API testing is easy",
-        "body": "Angular is cool",
-        "tagList": []
-      }
-    }
-    //                                                                                      // 1st request #41.1
-    cy.get('@token').then(token => {
-      cy.request({                                                                        // 2nd request #41.1
-        url: Cypress.env('apiUrl') + '/api/articles/',
-        headers: { 'Authorization': 'Token ' + token },
-        method: 'POST',
-        body: bodyRequest
-      }).then(response => {
-        expect(response.status).to.equal(201)
-      })
-
-      // cy.wait(300)
-      cy.contains('Global Feed').click()                                                       // #41.2
-      // cy.get('.article-preview').first().click()
-      cy.get('.article-preview').first().contains('.preview-link', 'Request from API').click()
-      cy.get('.article-actions').contains('Delete Article').click()  //use 2nd option to delete 2nd article
-
-      cy.request({                                                                            // #41.2
-        url: Cypress.env('apiUrl') + '/api/articles?limit=10&offset=0',
-        headers: { 'Authorization': 'Token ' + token },
-        method: 'GET'
-      }).its('body').then(body => {
-        // console.log(body)
-        expect(body.articles[0].title).not.to.equal('Request from API')
-      })
-    })
   })
 })
