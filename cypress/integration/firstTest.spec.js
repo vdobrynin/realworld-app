@@ -29,6 +29,7 @@ describe('test with backend', () => {
       expect(xhr.request.body.article.body).to.equal('This is a body of the article')  // validation
       expect(xhr.response.body.article.description).to.equal('This is a description') // validation
     })
+    cy.get('.article-actions').contains('Delete Article').click()
   })
 
   it('verify popular tags are displayed with routing object', () => { //lecture #39
@@ -64,7 +65,7 @@ describe('test with backend', () => {
   it('intercepting & modifying the request & response', () => {//-->copy from test above w/renaming & changes//lecture #40.1
     //                    //-->put it before an action and verification & save in global variable as alias
     // cy.intercept('POST', '**/articles', (req) => {
-    //   req.body.article.description = 'This is a description 2'
+    //   req.body.article.description = 'This is a description'
     // }).as('postArticles')                                                           //lecture #40.2
 
     cy.intercept('POST', '**/articles', (req) => {
@@ -82,23 +83,22 @@ describe('test with backend', () => {
 
     cy.wait('@postArticles')
     cy.get('@postArticles').then(xhr => {
-      console.log(xhr)
+      // console.log(xhr)
       expect(xhr.response.statusCode).to.equal(201)
       expect(xhr.request.body.article.body).to.equal('This is a body of the article')   // validation
       expect(xhr.response.body.article.description).to.equal('This is a description 2') // validation
     })
 
-    cy.get('.article-actions').contains('Delete Article').click()// to delete 1st article (I added in #42)
+    cy.get('.article-actions').contains('Delete Article').click()// to delete 1st article (I added in #41)
   })
 
-  it.only('delete a new article in a global feed', () => {                       // #41
-    const userCredentials = {
-      "user": {
-        "email": "pwtest60@test.com",
-        "password": "vd12345"
-      }
-    }
-
+  it('delete a new article in a global feed', () => {                       // #41
+    // const userCredentials = {                                // no need in #42
+    //   "user": {
+    //     "email": "pwtest60@test.com",
+    //     "password": "vd12345"
+    //   }
+    // }
     const bodyRequest = {
       "article": {
         "title": "Request from API",
@@ -108,9 +108,10 @@ describe('test with backend', () => {
       }
     }
     //                                                                           // 1st request #41.1
-    cy.request('POST', 'https://conduit-api.bondaracademy.com/api/users/login', userCredentials)
-      .its('body').then(body => {
-        const token = body.user.token
+    // //cy.request('POST', 'https://conduit-api.bondaracademy.com/api/users/login', userCredentials)
+    // //  .its('body').then(body => {
+    cy.get('@token').then(token => {                          // 1st request change in #42
+    //  //const token = body.user.token                      // no need in #42
 
         cy.request({                                                            // 2nd request #41.1
           url: 'https://conduit-api.bondaracademy.com/api/articles/',
