@@ -123,10 +123,9 @@ describe('test with backend', () => {
         })
 
         cy.contains('Global Feed').click()            // delete article through UI   // #41.2
-        // cy.get('.article-preview').first().click()
         cy.get('.article-preview').first().contains('.preview-link', 'Request from API').click()
-        cy.get('.article-actions').contains('Delete Article').click() //using 2nd option to delete 2nd article
-
+        cy.get('.article-actions').contains('Delete Article').click()//using 2nd option to delete 2nd article 
+        
         cy.request({                                                       // #41.3
           url: 'https://conduit-api.bondaracademy.com/api/articles?limit=10&offset=0',
           headers: { 'Authorization': 'Token ' + token },
@@ -135,6 +134,6 @@ describe('test with backend', () => {
           // console.log(body)
           expect(body.articles[0].title).not.to.equal('Request from API')
         })
-      })
+    })
   })
 })
