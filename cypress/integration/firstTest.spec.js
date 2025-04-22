@@ -7,12 +7,10 @@ describe('test with backend', () => {
     cy.intercept({ method: 'GET', path: 'tags' }, { fixture: 'tags.json' })   //lecture #40.1
     cy.loginToApplication()                  //lecture #37
   })
-
-  it.only('first', () => {  // #37
-    cy.log('Yaaay we logged in')
-  })
-
-  it('verify correct request and response', () => {
+  // it('first', () => {  // #37
+  //   cy.log('Yaaay we logged in')
+  // })
+  it.only('verify correct request and response', () => {
     //                    //-->put it before an action and verification & save in global variable as alias
     // cy.intercept('POST', 'https://conduit-api.bondaracademy.com/api/articles/').as('postArticles')//lecture #38
     cy.intercept('POST', '**/articles').as('postArticles')                                    //lecture #40
@@ -23,13 +21,13 @@ describe('test with backend', () => {
     cy.get('[formcontrolname="body"]').type('This is a body of the article')
     cy.contains('Publish Article').click()
 
-    cy.wait('@postArticles').then(xhr => { //lecture #38
+    cy.wait('@postArticles').then(xhr => {                        //lecture #38
       console.log(xhr)
       expect(xhr.response.statusCode).to.equal(201)
       expect(xhr.request.body.article.body).to.equal('This is a body of the article')  // validation
       expect(xhr.response.body.article.description).to.equal('This is a description') // validation
     })
-    cy.get('.article-actions').contains('Delete Article').click()
+    cy.get('.article-actions').contains('Delete Article').click() // delete
   })
 
   it('verify popular tags are displayed with routing object', () => { //lecture #39
