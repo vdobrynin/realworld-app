@@ -8,9 +8,9 @@ describe('test with backend', () => {
     cy.loginToApplication()                  //lecture #37
   })
 
-  // it('first', () => {
-  //   cy.log('Yaaay we logged in')
-  // })
+  it.only('first', () => {  // #37
+    cy.log('Yaaay we logged in')
+  })
 
   it('verify correct request and response', () => {
     //                    //-->put it before an action and verification & save in global variable as alias
