@@ -2,26 +2,26 @@
 describe('test with backend', () => {
   beforeEach('login to application', () => {
     //  //                                         //lecture #39 tags.json object are stubbed bellow
-    // cy.intercept('GET', 'https://conduit-api.bondaracademy.com/api/tags', { fixture: 'tags.json' })//lecture #39 
-    // cy.intercept('GET', '**/tags', { fixture: 'tags.json' })               //lecture #40
-    cy.intercept({ method: 'GET', path: 'tags' }, { fixture: 'tags.json' })   //lecture #40.1
+    // cy.intercept('GET', 'https://conduit-api.bondaracademy.com/api/tags', { fixture: 'tags.json' }) // #39 
+    // cy.intercept('GET', '**/tags', { fixture: 'tags.json' })               //#40
+    cy.intercept({ method: 'GET', path: 'tags' }, { fixture: 'tags.json' })   //#40.1
     cy.loginToApplication()                  //lecture #37
   })
   // it('first', () => {  // #37
   //   cy.log('Yaaay we logged in')
   // })
-  it.only('verify correct request and response', () => {
+  it('verify correct request and response', () => {
     //                    //-->put it before an action and verification & save in global variable as alias
-    // cy.intercept('POST', 'https://conduit-api.bondaracademy.com/api/articles/').as('postArticles')//lecture #38
-    cy.intercept('POST', '**/articles').as('postArticles')                                    //lecture #40
+    // cy.intercept('POST', 'https://conduit-api.bondaracademy.com/api/articles/').as('postArticles') // #38
+    cy.intercept('POST', '**/articles').as('postArticles')                                    // #40
 
-    cy.contains('New Article').click()                            //lecture #38
+    cy.contains('New Article').click()                            // #38
     cy.get('[formcontrolname="title"]').type('This is a title')
     cy.get('[formcontrolname="description"]').type('This is a description')
     cy.get('[formcontrolname="body"]').type('This is a body of the article')
     cy.contains('Publish Article').click()
 
-    cy.wait('@postArticles').then(xhr => {                        //lecture #38
+    cy.wait('@postArticles').then(xhr => {                        // #38
       console.log(xhr)
       expect(xhr.response.statusCode).to.equal(201)
       expect(xhr.request.body.article.body).to.equal('This is a body of the article')  // validation
@@ -30,7 +30,7 @@ describe('test with backend', () => {
     cy.get('.article-actions').contains('Delete Article').click() // delete
   })
 
-  it('verify popular tags are displayed with routing object', () => { //lecture #39
+  it('verify popular tags are displayed with routing object', () => { // #39
     // cy.log('we are log in')
     cy.get('.tag-list')
       .should('contain', 'cypress')
@@ -38,11 +38,11 @@ describe('test with backend', () => {
       .and('contain', 'testing')      //--> validate tags
   })
 
-  it('verify global feed likes counts', () => { //lecture #39.1
-    // cy.intercept('GET', 'https://conduit-api.bondaracademy.com/api/articles/feed*', { 'articles': [], 'articlesCount': 0 })//#39.1
-    // cy.intercept('GET', 'https://conduit-api.bondaracademy.com/api/articles*', { fixture: 'articles.json' })//#39.1
-    cy.intercept('GET', '**/articles/feed*', { 'articles': [], 'articlesCount': 0 })      //#40.1
-    cy.intercept('GET', '**/articles*', { fixture: 'articles.json' })                     //#40.1
+  it.only('verify global feed likes counts', () => { //lecture #39.1
+    cy.intercept('GET', 'https://conduit-api.bondaracademy.com/api/articles/feed*', { 'articles': [], 'articlesCount': 0 })//#39.1
+    cy.intercept('GET', 'https://conduit-api.bondaracademy.com/api/articles*', { fixture: 'articles.json' })//#39.1
+    // cy.intercept('GET', '**/articles/feed*', { 'articles': [], 'articlesCount': 0 })      //#40.1
+    // cy.intercept('GET', '**/articles*', { fixture: 'articles.json' })                     //#40.1
 
     cy.contains('Global Feed').click()
     cy.get('app-article-list button').then(heartList => {
@@ -54,7 +54,7 @@ describe('test with backend', () => {
       const articleLink = file.articles[1].slug
       file.articles[1].favoritesCount = 6                            //--> change from 5 to 6
       // cy.intercept('POST', 'https://conduit-api.bondaracademy.com/api/articles/' + articleLink + '/favorite', file)//#39.1
-      cy.intercept('POST', '**/articles/' + articleLink + '/favorite', file)                //#39.2
+      cy.intercept('POST', '**/articles/' + articleLink + '/favorite', file)           //#39.2
     })
 
     cy.get('app-article-list button').eq(1).click().should('contain', '6')        // validation
