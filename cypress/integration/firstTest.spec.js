@@ -38,7 +38,7 @@ describe('test with backend', () => {
       .and('contain', 'testing')      //--> validate tags
   })
 
-  it.only('verify global feed likes counts', () => { //lecture #39.1
+  it('verify global feed likes counts', () => { //lecture #39.1
     cy.intercept('GET', 'https://conduit-api.bondaracademy.com/api/articles/feed*', { 'articles': [], 'articlesCount': 0 })//#39.1
     cy.intercept('GET', 'https://conduit-api.bondaracademy.com/api/articles*', { fixture: 'articles.json' })//#39.1
     // cy.intercept('GET', '**/articles/feed*', { 'articles': [], 'articlesCount': 0 })      //#40.1
@@ -56,22 +56,22 @@ describe('test with backend', () => {
       // cy.intercept('POST', 'https://conduit-api.bondaracademy.com/api/articles/' + articleLink + '/favorite', file)//#39.1
       cy.intercept('POST', '**/articles/' + articleLink + '/favorite', file)           //#39.2
     })
-
     cy.get('app-article-list button').eq(1).click().should('contain', '6')        // validation
   })
 
-  it('intercepting & modifying the request & response', () => {//-->copy from test above w/renaming & changes//lecture #40.1
-    //                    //-->put it before an action and verification & save in global variable as alias
+  it.only('intercepting & modifying the request & response', () => {
+    //                     //-->copy from test above w/renaming & changes   // #40.1
+                       //-->put it before an action and verification & save in global variable as alias
     // cy.intercept('POST', '**/articles', (req) => {
-    //   req.body.article.description = 'This is a description'
-    // }).as('postArticles')                                                           //lecture #40.2
+    //   req.body.article.description = 'This is a description 2'
+    // }).as('postArticles')                                                  // #40.2
 
     cy.intercept('POST', '**/articles', (req) => {
       req.reply(res => {
         expect(res.body.article.description).to.equal('This is a description') // validation
-        res.body.article.description = 'This is a description 2'              // reply & modify request
+        res.body.article.description = 'This is a description 2'              // --> reply & modify request
       })
-    }).as('postArticles')                                                   //lecture #40.3
+    }).as('postArticles')                                                   // #40.3
 
     cy.contains('New Article').click()
     cy.get('[formcontrolname="title"]').type('This is a title')
@@ -87,7 +87,7 @@ describe('test with backend', () => {
       expect(xhr.response.body.article.description).to.equal('This is a description 2') // validation
     })
 
-    cy.get('.article-actions').contains('Delete Article').click()// to delete 1st article (I added in #41)
+    cy.get('.article-actions').contains('Delete Article').click()// to delete 1st article (I added for #40.2 & #40.3)
   })
 
   it('delete a new article in a global feed', () => {                       // #41
