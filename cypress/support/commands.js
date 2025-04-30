@@ -36,16 +36,15 @@
 //   }
 // }
 
-Cypress.Commands.add('loginToApplication', () => {
-    //                                           // --> we modified login below
-    // cy.visit('/login')                       // #37 during review
+Cypress.Commands.add('loginToApplication', () => {                                          
+    // cy.visit('/login')     // --> we modified login below     // #37 during review
     // cy.get('[placeholder="Email"]').type('pwtest60@test.com')
     // cy.get('[placeholder="Password"]').type('vd12345')
     // cy.get('form').submit()
-    //                                               // headless authorization #42
-    const userCredentials = {
+
+    const userCredentials = {   // headless authorization #42
         "user": {
-            "email": "pwtest60@test.com",   // #42
+            "email": "pwtest60@test.com",              // #42
             "password": "vd12345"
             // "email": Cypress.env("username"),
             // "password": Cypress.env("password")
@@ -54,7 +53,7 @@ Cypress.Commands.add('loginToApplication', () => {
     cy.request('POST', Cypress.env('apiUrl') + '/api/users/login', userCredentials)
         .its('body').then(body => {
             const token = body.user.token
-            cy.wrap(token).as('token')
+            cy.wrap(token).as('token')          // save in #42
             cy.visit('/', {
                 onBeforeLoad(win) {
                     win.localStorage.setItem('jwtToken', token)
