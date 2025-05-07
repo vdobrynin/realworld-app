@@ -4,6 +4,11 @@
 /dist
 /tmp
 /out-tsc
+/cypress/mochawesome-report
+/cypress/screenshots
+/cypress/results
+/cypress/videos
+/cypress/downloads
 
 # dependencies
 /node_modules
