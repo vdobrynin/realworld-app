@@ -15,7 +15,7 @@
     "mochawesome:merge": "npx mochawesome-merge \"cypress/results/mochawesome/*.json\" > mochawesome.json && npx marge mochawesome.json",
     "junit:merge": "npx junit-merge -d cypress/results/junit -o cypress/results/junit/result.xml",
     "cypress:run2": "npm run prereport && npx cypress run",
-    "cypress:e2e": "start-test start http-get://localhost:4200 cypress:run; npm run junit:merge; npm run mochawesome:merge",
+    "cypress:e2e": "start-test start http-get://localhost:4200 cypress:run",
     "cy:open_dev": "npx cypress open --env username=pwtest63@test.com,password=vd123456",
     "cy:open_qa": "npx cypress open --env username=pwtest64@test.com,password=vd1234567",
     "cy:open_process": "npx cypress open --env username=$DB_USERNAME,password=$PASSWORD",
@@ -41,6 +41,7 @@
     "@rx-angular/template": "17.0.0",
     "marked": "^11.2.0",
     "npm-check": "^6.0.1",
+    "react-scripts": "^5.0.1",
     "rxjs": "^7.8.2",
     "tslib": "^2.8.1",
     "zone.js": "^0.14.10"
