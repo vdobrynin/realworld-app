@@ -110,7 +110,8 @@ describe('test with backend', () => {
     cy.get('@token').then(token => {                           // 1st request change in #42
       // const token = body.user.token                      //we do no need it in #42
       cy.request({                                                    // 2nd request #41.1 & #42
-        url: 'https://conduit-api.bondaracademy.com/api/articles/',
+        url: Cypress.env('apiUrl') + '/api/articles/',           // #45.2
+        // url: 'https://conduit-api.bondaracademy.com/api/articles/',
         headers: { 'Authorization': 'Token ' + token },
         method: 'POST',
         body: bodyRequest
@@ -123,7 +124,8 @@ describe('test with backend', () => {
       cy.get('.article-actions').contains('Delete Article').click()//using 2nd option to delete 2nd article 
 
       cy.request({                                                       // #41.3
-        url: 'https://conduit-api.bondaracademy.com/api/articles?limit=10&offset=0',
+        url: Cypress.env('apiUrl') + '/api/articles?limit=10&offset=0',       // #45.2
+        // url: 'https://conduit-api.bondaracademy.com/api/articles?limit=10&offset=0',
         headers: { 'Authorization': 'Token ' + token },
         method: 'GET'
       }).its('body').then(body => {
