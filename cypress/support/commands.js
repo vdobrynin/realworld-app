@@ -41,16 +41,15 @@ Cypress.Commands.add('loginToApplication', () => {
     // cy.get('[placeholder="Email"]').type('pwtest60@test.com')
     // cy.get('[placeholder="Password"]').type('vd12345')
     // cy.get('form').submit()
-
     const userCredentials = {   // headless authorization #42
         "user": {
-            "email": "pwtest60@test.com",              // #42
-            "password": "vd12345"
-            // "email": Cypress.env("username"),
-            // "password": Cypress.env("password")
+            // "email": "pwtest60@test.com",              // #42
+            // "password": "vd12345"                      // #45.1                     
+            "email": Cypress.env("username"),        // #45.1
+            "password": Cypress.env("password")      // #45.1
         }
     }
-    cy.request('POST', Cypress.env('apiUrl') + '/api/users/login', userCredentials)
+    cy.request('POST', Cypress.env('apiUrl') + '/api/users/login', userCredentials) // #45
         .its('body').then(body => {
             const token = body.user.token
             cy.wrap(token).as('token')          // save in #42

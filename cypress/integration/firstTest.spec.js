@@ -109,7 +109,6 @@ describe('test with backend', () => {
     //   .its('body').then(body => {
     cy.get('@token').then(token => {                           // 1st request change in #42
       // const token = body.user.token                      //we do no need it in #42
-
       cy.request({                                                    // 2nd request #41.1 & #42
         url: 'https://conduit-api.bondaracademy.com/api/articles/',
         headers: { 'Authorization': 'Token ' + token },
