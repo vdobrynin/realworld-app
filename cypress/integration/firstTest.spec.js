@@ -86,7 +86,7 @@ describe('test with backend', () => {
       expect(xhr.request.body.article.body).to.equal('This is a body of the article')   // validation
       expect(xhr.response.body.article.description).to.equal('This is a description 2') // validation
     })
-    cy.get('.article-actions').contains('Delete Article').click()// to delete 1st article (I added for #40.2 & #40.3)
+    cy.get('.article-actions').contains(" Delete Article ").click()// to delete 1st article (I added for #40.2 & #40.3)
   })
 
   it('delete a new article in a global feed', () => {                       // #41
@@ -120,8 +120,8 @@ describe('test with backend', () => {
       })
 
       cy.contains('Global Feed').click()   // delete article through UI   // #41.2
-      cy.get('.article-preview').first().contains('.preview-link', 'Request from API').click()
-      cy.get('.article-actions').contains('Delete Article').click()//using 2nd option to delete 2nd article 
+      cy.get('.article-preview').contains('.preview-link', 'Request from API').click()
+      cy.get('.article-actions').contains(" Delete Article ").click()//using 2nd option to delete 2nd article 
 
       cy.request({                                                       // #41.3
         url: Cypress.env('apiUrl') + '/api/articles?limit=10&offset=0',       // #45.2

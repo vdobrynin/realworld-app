@@ -17,7 +17,7 @@
     "cypress:run2": "npm run prereport && npx cypress run",
     "cypress:e2e": "start-test start http-get://localhost:4200 cypress:run",
     "cy:open_dev": "npx cypress open --env username=pwtest63@test.com,password=vd123456",
-    "cy:open_qa": "npx cypress open --env username=pwtest64@test.com,password=vd1234567",
+    "cy:open_qa": "npx cypress open --env username=pwtest65@test.com,password=vd1234567",
     "cy:open_process": "npx cypress open --env username=$DB_USERNAME,password=$PASSWORD",
     "prepare": "husky install"
   },

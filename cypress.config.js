@@ -10,7 +10,7 @@ module.exports = defineConfig({
   },
   env: {                              // #45
     username: "pwtest60@test.com",
-    password: "vd12345",
+    password: "",                       // #45.3 remove password
     apiUrl: "https://conduit-api.bondaracademy.com",
   },
   retries: {
@@ -20,22 +20,22 @@ module.exports = defineConfig({
   e2e: {
     setupNodeEvents(on, config) {
       // implement node event listeners here
-      // const username = process.env.DB_USERNAME;  // #45.2
-      // const password = process.env.PASSWORD;
+      const username = process.env.DB_USERNAME              // #45.3
+      const password = process.env.PASSWORD
 
-      // if (!password) {
-      //   throw new Error(`missing PASSWORD environment variable`)
-      // }
+      if (!password) {                                      // #45.3
+        throw new Error(`missing PASSWORD environment variable`)
+      }
 
-      // config.env = { username, password };
-      // return config;
+      config.env = { username, password }                   // #45.3
+      return config
     },
     baseUrl: "https://conduit.bondaracademy.com",
     // baseUrl: "http://localhost:4200",
     // baseUrl: "http://host.docker.internal:4200",
     specPattern: "cypress/integration/**/*.spec.{js,jsx,ts,tsx}",
     excludeSpecPattern: "**/examples/*",
-    // requestTimeout: 10000,
+    requestTimeout: 10000,
   },
   component: {
     devServer: {
