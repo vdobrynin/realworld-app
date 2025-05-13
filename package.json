@@ -14,7 +14,7 @@
     "prereport": "npm run delete:reports",
     "mochawesome:merge": "npx mochawesome-merge \"cypress/results/mochawesome/*.json\" > mochawesome.json && npx marge mochawesome.json",
     "junit:merge": "npx junit-merge -d cypress/results/junit -o cypress/results/junit/result.xml",
-    "cypress:run2": "npm run prereport && npx cypress run",
+    "cypress:run-2": "npm run prereport && npx cypress run",
     "cypress:e2e": "start-test start http-get://localhost:4200 cypress:run",
     "cy:open_dev": "npx cypress open --env username=pwtest63@test.com,password=vd123456",
     "cy:open_qa": "npx cypress open --env username=pwtest65@test.com,password=vd1234567",
