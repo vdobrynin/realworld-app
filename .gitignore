@@ -9,6 +9,7 @@
 /cypress/results
 /cypress/videos
 /cypress/downloads
+mochawesome-report/mochawesome.html
 
 # dependencies
 /node_modules
