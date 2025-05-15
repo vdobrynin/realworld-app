@@ -4,6 +4,7 @@ module.exports = defineConfig({
   viewportHeight: 900, //1200,
   viewportWidth: 1440, //1920,
   video: false,
+  experimentalWebKitSupport: true,
   reporter: "cypress-multi-reporters",
   reporterOptions: {
     configFile: "reporter-config.json",
