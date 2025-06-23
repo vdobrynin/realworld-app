@@ -1,4 +1,3 @@
-
 describe('test with backend', () => {
   beforeEach('login to application', () => {
     //  //                                         //lecture #39 tags.json object are stubbed bellow
@@ -12,9 +11,9 @@ describe('test with backend', () => {
   // })
   it('verify correct request and response', () => {
     //                    //-->put it before an action and verification & save in global variable as alias
-    // cy.intercept('POST', 'https://conduit-api.bondaracademy.com/api/articles/').as('postArticles') // #38
-    cy.intercept('POST', '**/articles').as('postArticles')                                    // #40
-
+    //cy.intercept('POST', 'https://conduit-api.bondaracademy.com/api/articles/').as('postArticles') // #38
+    cy.intercept('POST', '**/articles').as('postArticles')                            // #40
+    
     cy.contains('New Article').click()                            // #38
     cy.get('[formcontrolname="title"]').type('This is a title')
     cy.get('[formcontrolname="description"]').type('This is a description')
@@ -32,10 +31,7 @@ describe('test with backend', () => {
 
   it('verify popular tags are displayed with routing object', () => { // #39
     // cy.log('we are log in')
-    cy.get('.tag-list')
-      .should('contain', 'cypress')
-      .and('contain', 'automation')
-      .and('contain', 'testing')      //--> validate tags
+    cy.get('.tag-list').should('contain', 'cypress').and('contain', 'automation').and('contain', 'testing')      //--> validate tags
   })
 
   it('verify global feed likes counts', () => { //lecture #39.1

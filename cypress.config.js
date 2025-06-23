@@ -19,19 +19,18 @@ module.exports = defineConfig({
     openMode: 0
   },
   e2e: {
+    experimentalStudio: true,
     setupNodeEvents(on, config) {
       // implement node event listeners here
       const username = process.env.DB_USERNAME              // #45.3
       const password = process.env.PASSWORD
-
       // if (!password) {                                   // #45.3 created & // #46 commented
       //   throw new Error(`missing PASSWORD environment variable`)
       // }
-
       config.env = { username, password }                   // #45.3
       return config
     },
-    baseUrl: "https://conduit.bondaracademy.com",
+    baseUrl: "https://conduit.bondaracademy.com",  // to run USE THIS
     // baseUrl: "http://localhost:4200",
     // baseUrl: "http://host.docker.internal:4200",
     specPattern: "cypress/integration/**/*.spec.{js,jsx,ts,tsx}",
