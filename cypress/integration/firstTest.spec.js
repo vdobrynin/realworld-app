@@ -13,7 +13,7 @@ describe('test with backend', () => {
     //                    //-->put it before an action and verification & save in global variable as alias
     //cy.intercept('POST', 'https://conduit-api.bondaracademy.com/api/articles/').as('postArticles') // #38
     cy.intercept('POST', '**/articles').as('postArticles')                            // #40
-    
+
     cy.contains('New Article').click()                            // #38
     cy.get('[formcontrolname="title"]').type('This is a title')
     cy.get('[formcontrolname="description"]').type('This is a description')
@@ -23,27 +23,36 @@ describe('test with backend', () => {
     cy.wait('@postArticles').then(xhr => {                        // #38
       console.log(xhr)
       expect(xhr.response.statusCode).to.equal(201)
-      expect(xhr.request.body.article.body).to.equal('This is a body of the article')  // validation
-      expect(xhr.response.body.article.description).to.equal('This is a description') // validation
+      expect(xhr.request.body.article.body)
+        .to.equal('This is a body of the article')  // validation
+      expect(xhr.response.body.article.description)
+        .to.equal('This is a description') // validation
     })
-    cy.get('.article-actions').contains(' Delete Article ').click() // delete
+    cy.get('.article-actions')
+      .contains(' Delete Article ')
+      .click() // delete
   })
 
   it('verify popular tags are displayed with routing object', () => { // #39
     // cy.log('we are log in')
-    cy.get('.tag-list').should('contain', 'cypress').and('contain', 'automation').and('contain', 'testing')      //--> validate tags
+    cy.get('.tag-list')
+      .should('contain', 'cypress')
+      .and('contain', 'automation')
+      .and('contain', 'testing')      //--> validate tags
   })
 
-  it('verify global feed likes counts', () => { //lecture #39.1
-    cy.intercept('GET', 'https://conduit-api.bondaracademy.com/api/articles/feed*', { 'articles': [], 'articlesCount': 0 })//#39.1
-    cy.intercept('GET', 'https://conduit-api.bondaracademy.com/api/articles*', { fixture: 'articles.json' })//#39.1
-    // cy.intercept('GET', '**/articles/feed*', { 'articles': [], 'articlesCount': 0 })      //#40.1
-    // cy.intercept('GET', '**/articles*', { fixture: 'articles.json' })                     //#40.1
+  it('verify global feed likes counts', () => {                 //lecture #39.1
+    // cy.intercept('GET', 'https://conduit-api.bondaracademy.com/api/articles/feed*', { 'articles': [], 'articlesCount': 0 })//#39.1
+    // cy.intercept('GET', 'https://conduit-api.bondaracademy.com/api/articles*', { fixture: 'articles.json' })//#39.1
+    cy.intercept('GET', '**/articles/feed*', { 'articles': [], 'articlesCount': 0 })      //#40.1
+    cy.intercept('GET', '**/articles*', { fixture: 'articles.json' })                     //#40.1
 
     cy.contains('Global Feed').click()
     cy.get('app-article-list button').then(heartList => {
-      expect(heartList[0]).to.contain('1')
-      expect(heartList[1]).to.contain('5') //#39.1
+      expect(heartList[0])
+        .to.contain('1')
+      expect(heartList[1])
+        .to.contain('5') //#39.1
     })
 
     cy.fixture('articles').then(file => { //#39.1
@@ -52,7 +61,10 @@ describe('test with backend', () => {
       // cy.intercept('POST', 'https://conduit-api.bondaracademy.com/api/articles/' + articleLink + '/favorite', file)//#39.1
       cy.intercept('POST', '**/articles/' + articleLink + '/favorite', file)           //#39.2
     })
-    cy.get('app-article-list button').eq(1).click().should('contain', '6')        // validation
+    cy.get('app-article-list button')
+      .eq(1)
+      .click()
+      .should('contain', '6')        // validation
   })
 
   it('intercepting & modifying the request & response', () => {
@@ -64,7 +76,8 @@ describe('test with backend', () => {
 
     cy.intercept('POST', '**/articles', (req) => {
       req.reply(res => {
-        expect(res.body.article.description).to.equal('This is a description') // validation
+        expect(res.body.article.description)
+          .to.equal('This is a description') // validation
         res.body.article.description = 'This is a description 2'              // --> reply & modify request
       })
     }).as('postArticles')                                                   // #40.3
@@ -79,8 +92,10 @@ describe('test with backend', () => {
     cy.get('@postArticles').then(xhr => {
       // console.log(xhr)
       expect(xhr.response.statusCode).to.equal(201)
-      expect(xhr.request.body.article.body).to.equal('This is a body of the article')   // validation
-      expect(xhr.response.body.article.description).to.equal('This is a description 2') // validation
+      expect(xhr.request.body.article.body)
+        .to.equal('This is a body of the article')    // validation
+      expect(xhr.response.body.article.description)
+        .to.equal('This is a description 2')        // validation
     })
     cy.get('.article-actions').contains(' Delete Article ').click()// to delete 1st article (I added for #40.2 & #40.3)
   })
@@ -117,8 +132,12 @@ describe('test with backend', () => {
 
       cy.get('img').click('topRight', { force: true }) // change at #47
       // cy.contains('Global Feed').dblclick() // delete article through UI // #41.2
-      cy.get('.article-preview').contains('.preview-link', 'Request from API').click()
-      cy.get('.article-actions').contains('[class="btn btn-sm btn-outline-danger"]', ' Delete Article ').click()//using 2nd option to delete 2nd article 
+      cy.get('.article-preview')
+        .contains('.preview-link', 'Request from API')
+        .click()
+      cy.get('.article-actions')
+        .contains('[class="btn btn-sm btn-outline-danger"]', ' Delete Article ')
+        .click()//using 2nd option to delete 2nd article 
 
       cy.request({                                                       // #41.3
         url: Cypress.env('apiUrl') + '/api/articles?limit=10&offset=0',       // #45.2
@@ -127,7 +146,8 @@ describe('test with backend', () => {
         method: 'GET'
       }).its('body').then(body => {
         // console.log(body)
-        expect(body.articles[0].title).not.to.equal('Request from API')
+        expect(body.articles[0].title)
+          .not.to.equal('Request from API')
       })
     })
   })
