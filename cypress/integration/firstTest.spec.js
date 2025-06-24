@@ -28,9 +28,10 @@ describe('test with backend', () => {
       expect(xhr.response.body.article.description)
         .to.equal('This is a description') // validation
     })
+    
     cy.get('.article-actions')
       .contains(' Delete Article ')
-      .click() // delete
+      .click()                      // delete
   })
 
   it('verify popular tags are displayed with routing object', () => { // #39
@@ -97,7 +98,9 @@ describe('test with backend', () => {
       expect(xhr.response.body.article.description)
         .to.equal('This is a description 2')        // validation
     })
-    cy.get('.article-actions').contains(' Delete Article ').click()// to delete 1st article (I added for #40.2 & #40.3)
+    cy.get('.article-actions')
+      .contains(' Delete Article ')
+      .click()              // to delete 1st article (I added for #40.2 & #40.3)
   })
 
   it('delete a new article in a global feed', () => {                       // #41
@@ -137,7 +140,7 @@ describe('test with backend', () => {
         .click()
       cy.get('.article-actions')
         .contains('[class="btn btn-sm btn-outline-danger"]', ' Delete Article ')
-        .click()//using 2nd option to delete 2nd article 
+        .click()            //using 2nd option to delete 2nd article 
 
       cy.request({                                                       // #41.3
         url: Cypress.env('apiUrl') + '/api/articles?limit=10&offset=0',       // #45.2
