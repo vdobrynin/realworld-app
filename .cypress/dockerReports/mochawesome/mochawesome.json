@@ -1,82 +1,24 @@
 {
   "stats": {
-    "suites": 2,
-    "tests": 6,
-    "passes": 6,
+    "suites": 1,
+    "tests": 5,
+    "passes": 5,
     "pending": 0,
     "failures": 0,
-    "testsRegistered": 6,
+    "start": "2025-06-24T19:37:23.356Z",
+    "end": "2025-06-24T19:37:43.791Z",
+    "duration": 20435,
+    "testsRegistered": 5,
     "passPercent": 100,
     "pendingPercent": 0,
     "other": 0,
     "hasOther": false,
     "skipped": 0,
-    "hasSkipped": false,
-    "start": "2025-06-25T10:38:33.458Z",
-    "end": "2025-06-25T10:38:51.462Z",
-    "duration": 18004
+    "hasSkipped": false
   },
   "results": [
     {
-      "uuid": "2b3ec5a8-60f6-4384-8b7f-606e3d9951bd",
-      "title": "",
-      "fullFile": "cypress/integration/secondTest.spec.js",
-      "file": "cypress/integration/secondTest.spec.js",
-      "beforeHooks": [],
-      "afterHooks": [],
-      "tests": [],
-      "suites": [
-        {
-          "uuid": "e3380458-f095-4549-9fd8-aa10cd11605b",
-          "title": "Test log out",
-          "fullFile": "",
-          "file": "",
-          "beforeHooks": [],
-          "afterHooks": [],
-          "tests": [
-            {
-              "title": "verify use can log out successfully",
-              "fullTitle": "Test log out verify use can log out successfully",
-              "timedOut": null,
-              "duration": 1696,
-              "state": "passed",
-              "speed": "fast",
-              "pass": true,
-              "fail": false,
-              "pending": false,
-              "context": null,
-              "code": "// #46\n// it('verify use can log out successfully', () => {\ncy.contains('Settings').click();\ncy.contains('Or click here to logout').click();\ncy.get('.navbar-nav').should('contain', 'Sign up');\n// cy.get('.navbar-nav').should('contain', 'Sign up2') // #46 for check how many retries",
-              "err": {},
-              "uuid": "3cdfad21-965b-4da0-a4ca-d366ecc37a1a",
-              "parentUUID": "e3380458-f095-4549-9fd8-aa10cd11605b",
-              "isHook": false,
-              "skipped": false
-            }
-          ],
-          "suites": [],
-          "passes": [
-            "3cdfad21-965b-4da0-a4ca-d366ecc37a1a"
-          ],
-          "failures": [],
-          "pending": [],
-          "skipped": [],
-          "duration": 1696,
-          "root": false,
-          "rootEmpty": false,
-          "_timeout": 2000
-        }
-      ],
-      "passes": [],
-      "failures": [],
-      "pending": [],
-      "skipped": [],
-      "duration": 0,
-      "root": true,
-      "rootEmpty": true,
-      "_timeout": 2000
-    },
-    {
-      "uuid": "cdaebc57-aada-4140-8fc9-7b321bff4a2f",
+      "uuid": "4039a03b-9320-496a-a2de-06663a87b809",
       "title": "",
       "fullFile": "cypress/integration/firstTest.spec.js",
       "file": "cypress/integration/firstTest.spec.js",
@@ -85,7 +27,7 @@
       "tests": [],
       "suites": [
         {
-          "uuid": "932d6299-d8a6-4c8f-86df-f363ca7c54b7",
+          "uuid": "6f083f5d-dd5f-49d2-b1d1-5286226cca22",
           "title": "test with backend",
           "fullFile": "",
           "file": "",
@@ -96,7 +38,7 @@
               "title": "verify correct request and response",
               "fullTitle": "test with backend verify correct request and response",
               "timedOut": null,
-              "duration": 5438,
+              "duration": 7699,
               "state": "passed",
               "speed": "medium",
               "pass": true,
@@ -105,8 +47,8 @@
               "context": null,
               "code": "//                    //-->put it before an action and verification & save in global variable as alias\n//cy.intercept('POST', 'https://conduit-api.bondaracademy.com/api/articles/').as('postArticles') // #38\ncy.intercept('POST', '**/articles').as('postArticles'); // #40\ncy.contains('New Article').click(); // #38\ncy.get('[formcontrolname=\"title\"]').type('This is a title');\ncy.get('[formcontrolname=\"description\"]').type('This is a description');\ncy.get('[formcontrolname=\"body\"]').type('This is a body of the article');\ncy.contains('Publish Article').click();\ncy.wait('@postArticles').then(xhr => {\n  // #38\n  console.log(xhr);\n  expect(xhr.response.statusCode).to.equal(201);\n  expect(xhr.request.body.article.body).to.equal('This is a body of the article'); // validation\n  expect(xhr.response.body.article.description).to.equal('This is a description'); // validation\n});\ncy.get('.article-actions').contains(' Delete Article ').click(); // delete",
               "err": {},
-              "uuid": "cd609561-1bbf-4bc2-a25f-1fbc055fc829",
-              "parentUUID": "932d6299-d8a6-4c8f-86df-f363ca7c54b7",
+              "uuid": "0eb3b0a5-3c65-4232-b8f8-e9879e069cd5",
+              "parentUUID": "6f083f5d-dd5f-49d2-b1d1-5286226cca22",
               "isHook": false,
               "skipped": false
             },
@@ -114,7 +56,7 @@
               "title": "verify popular tags are displayed with routing object",
               "fullTitle": "test with backend verify popular tags are displayed with routing object",
               "timedOut": null,
-              "duration": 793,
+              "duration": 1720,
               "state": "passed",
               "speed": "fast",
               "pass": true,
@@ -123,8 +65,8 @@
               "context": null,
               "code": "// #39\n// cy.log('we are log in')\ncy.get('.tag-list').should('contain', 'cypress').and('contain', 'automation').and('contain', 'testing'); //--> validate tags",
               "err": {},
-              "uuid": "c6de8bb9-8c54-4c59-88ba-dfb6bfde5309",
-              "parentUUID": "932d6299-d8a6-4c8f-86df-f363ca7c54b7",
+              "uuid": "b246e807-930d-45f7-9172-6622942b81d3",
+              "parentUUID": "6f083f5d-dd5f-49d2-b1d1-5286226cca22",
               "isHook": false,
               "skipped": false
             },
@@ -132,7 +74,7 @@
               "title": "verify global feed likes counts",
               "fullTitle": "test with backend verify global feed likes counts",
               "timedOut": null,
-              "duration": 1213,
+              "duration": 1938,
               "state": "passed",
               "speed": "fast",
               "pass": true,
@@ -141,8 +83,8 @@
               "context": null,
               "code": "//lecture #39.1\n// cy.intercept('GET', 'https://conduit-api.bondaracademy.com/api/articles/feed*', { 'articles': [], 'articlesCount': 0 })//#39.1\n// cy.intercept('GET', 'https://conduit-api.bondaracademy.com/api/articles*', { fixture: 'articles.json' })//#39.1\ncy.intercept('GET', '**/articles/feed*', {\n  'articles': [],\n  'articlesCount': 0\n}); //#40.1\ncy.intercept('GET', '**/articles*', {\n  fixture: 'articles.json'\n}); //#40.1\ncy.contains('Global Feed').click();\ncy.get('app-article-list button').then(heartList => {\n  expect(heartList[0]).to.contain('1');\n  expect(heartList[1]).to.contain('5'); //#39.1\n});\ncy.fixture('articles').then(file => {\n  //#39.1\n  const articleLink = file.articles[1].slug;\n  file.articles[1].favoritesCount = 6; //--> change from 5 to 6\n  // cy.intercept('POST', 'https://conduit-api.bondaracademy.com/api/articles/' + articleLink + '/favorite', file)//#39.1\n  cy.intercept('POST', '**/articles/' + articleLink + '/favorite', file); //#39.2\n});\ncy.get('app-article-list button').eq(1).click().should('contain', '6'); // validation",
               "err": {},
-              "uuid": "7cfb7b54-904e-45ab-9143-c1f0a910ce8a",
-              "parentUUID": "932d6299-d8a6-4c8f-86df-f363ca7c54b7",
+              "uuid": "a700d033-e145-4fcc-b72a-e8df9979e20c",
+              "parentUUID": "6f083f5d-dd5f-49d2-b1d1-5286226cca22",
               "isHook": false,
               "skipped": false
             },
@@ -150,7 +92,7 @@
               "title": "intercepting & modifying the request & response",
               "fullTitle": "test with backend intercepting & modifying the request & response",
               "timedOut": null,
-              "duration": 2714,
+              "duration": 4312,
               "state": "passed",
               "speed": "fast",
               "pass": true,
@@ -159,8 +101,8 @@
               "context": null,
               "code": "//                     //-->copy from test above w/renaming & changes   // #40.1\n//-->put it before an action and verification & save in global variable as alias\n// cy.intercept('POST', '**/articles', (req) => {\n//   req.body.article.description = 'This is a description 2'\n// }).as('postArticles')                                                  // #40.2\ncy.intercept('POST', '**/articles', req => {\n  req.reply(res => {\n    expect(res.body.article.description).to.equal('This is a description'); // validation\n    res.body.article.description = 'This is a description 2'; // --> reply & modify request\n  });\n}).as('postArticles'); // #40.3\ncy.contains('New Article').click();\ncy.get('[formcontrolname=\"title\"]').type('This is a title');\ncy.get('[formcontrolname=\"description\"]').type('This is a description');\ncy.get('[formcontrolname=\"body\"]').type('This is a body of the article');\ncy.contains('Publish Article').click();\ncy.wait('@postArticles');\ncy.get('@postArticles').then(xhr => {\n  // console.log(xhr)\n  expect(xhr.response.statusCode).to.equal(201);\n  expect(xhr.request.body.article.body).to.equal('This is a body of the article'); // validation\n  expect(xhr.response.body.article.description).to.equal('This is a description 2'); // validation\n});\ncy.get('.article-actions').contains(' Delete Article ').click(); // to delete 1st article (I added for #40.2 & #40.3)",
               "err": {},
-              "uuid": "fd1b9b72-0d91-4d00-8081-9efe35339633",
-              "parentUUID": "932d6299-d8a6-4c8f-86df-f363ca7c54b7",
+              "uuid": "214e2c85-9cd4-4a6e-bf1a-75dc791176cc",
+              "parentUUID": "6f083f5d-dd5f-49d2-b1d1-5286226cca22",
               "isHook": false,
               "skipped": false
             },
@@ -168,7 +110,7 @@
               "title": "delete a new article in a global feed",
               "fullTitle": "test with backend delete a new article in a global feed",
               "timedOut": null,
-              "duration": 2863,
+              "duration": 4217,
               "state": "passed",
               "speed": "fast",
               "pass": true,
@@ -177,24 +119,24 @@
               "context": null,
               "code": "// #41\n// const userCredentials = {                                //we do no need it in #42\n//   \"user\": {\n//     \"email\": \"pwtest60@test.com\",\n//     \"password\": \"vd12345\"\n//   }\n// }\nconst bodyRequest = {\n  \"article\": {\n    \"title\": \"Request from API\",\n    \"description\": \"API testing is easy\",\n    \"body\": \"Angular is cool\",\n    \"tagList\": []\n  }\n};\n//                                                      // 1st request #41.1\n// cy.request('POST', 'https://conduit-api.bondaracademy.com/api/users/login', userCredentials)\n//   .its('body').then(body => {\ncy.get('@token').then(token => {\n  // 1st request change in #42\n  // const token = body.user.token                      //we do no need it in #42\n  cy.request({\n    // 2nd request #41.1 & #42\n    url: Cypress.env('apiUrl') + '/api/articles/',\n    // #45.2\n    // url: 'https://conduit-api.bondaracademy.com/api/articles/',\n    headers: {\n      'Authorization': 'Token ' + token\n    },\n    method: 'POST',\n    body: bodyRequest\n  }).then(response => {\n    expect(response.status).to.equal(201);\n  });\n  cy.get('img').click('topRight', {\n    force: true\n  }); // change at #47\n  // cy.contains('Global Feed').dblclick() // delete article through UI // #41.2\n  cy.get('.article-preview').contains('.preview-link', 'Request from API').click();\n  cy.get('.article-actions').contains('[class=\"btn btn-sm btn-outline-danger\"]', ' Delete Article ').click(); //using 2nd option to delete 2nd article \n  cy.request({\n    // #41.3\n    url: Cypress.env('apiUrl') + '/api/articles?limit=10&offset=0',\n    // #45.2\n    // url: 'https://conduit-api.bondaracademy.com/api/articles?limit=10&offset=0',\n    headers: {\n      'Authorization': 'Token ' + token\n    },\n    method: 'GET'\n  }).its('body').then(body => {\n    // console.log(body)\n    expect(body.articles[0].title).not.to.equal('Request from API');\n  });\n});",
               "err": {},
-              "uuid": "0aacdbb4-d23e-4839-98ec-985a08ec1442",
-              "parentUUID": "932d6299-d8a6-4c8f-86df-f363ca7c54b7",
+              "uuid": "3c6e026e-1a05-479f-84b4-ff7a69de64c1",
+              "parentUUID": "6f083f5d-dd5f-49d2-b1d1-5286226cca22",
               "isHook": false,
               "skipped": false
             }
           ],
           "suites": [],
           "passes": [
-            "cd609561-1bbf-4bc2-a25f-1fbc055fc829",
-            "c6de8bb9-8c54-4c59-88ba-dfb6bfde5309",
-            "7cfb7b54-904e-45ab-9143-c1f0a910ce8a",
-            "fd1b9b72-0d91-4d00-8081-9efe35339633",
-            "0aacdbb4-d23e-4839-98ec-985a08ec1442"
+            "0eb3b0a5-3c65-4232-b8f8-e9879e069cd5",
+            "b246e807-930d-45f7-9172-6622942b81d3",
+            "a700d033-e145-4fcc-b72a-e8df9979e20c",
+            "214e2c85-9cd4-4a6e-bf1a-75dc791176cc",
+            "3c6e026e-1a05-479f-84b4-ff7a69de64c1"
           ],
           "failures": [],
           "pending": [],
           "skipped": [],
-          "duration": 13021,
+          "duration": 19886,
           "root": false,
           "rootEmpty": false,
           "_timeout": 2000
@@ -212,7 +154,7 @@
   ],
   "meta": {
     "mocha": {
-      "version": "7.2.0"
+      "version": "7.0.1"
     },
     "mochawesome": {
       "options": {

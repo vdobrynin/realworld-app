@@ -12,6 +12,8 @@
 /cypress/videos
 /cypress/downloads
 mochawesome-report/mochawesome.html
+dockerReports/junit/
+dockerReports/mochawesome/
 
 # dependencies
 /node_modules
