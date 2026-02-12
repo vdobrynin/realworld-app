@@ -1,8 +1,8 @@
 const { defineConfig } = require('cypress')
 
 module.exports = defineConfig({
-  viewportHeight: 900, //1200,
-  viewportWidth: 1440, //1920,
+  viewportHeight: 1200, //900,
+  viewportWidth: 1920, //1440, 
   video: false,
   experimentalWebKitSupport: true,
   reporter: "cypress-multi-reporters",
@@ -33,7 +33,7 @@ module.exports = defineConfig({
     baseUrl: "https://conduit.bondaracademy.com",  // to run USE THIS
     // baseUrl: "http://localhost:4200",
     // baseUrl: "http://host.docker.internal:4200",
-    specPattern: "cypress/integration/**/*.spec.{js,jsx,ts,tsx}",
+    specPattern: "cypress/integration/**/*.cy.{js,jsx,ts,tsx}",
     excludeSpecPattern: "**/examples/*",
     requestTimeout: 10000,
   },
