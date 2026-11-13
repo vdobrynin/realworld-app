@@ -4,7 +4,11 @@ describe('test with backend', () => {
     // cy.intercept('GET', 'https://conduit-api.bondaracademy.com/api/tags', { fixture: 'tags.json' }) // #39 
     // cy.intercept('GET', '**/tags', { fixture: 'tags.json' })               //#40
     cy.intercept({ method: 'GET', path: 'tags' }, { fixture: 'tags.json' })   //#40.1
+    cy.intercept('GET', '**/articles*').as('initialArticles')                 // wait for the first list request
     cy.loginToApplication()                  //lecture #37
+    // Let the initial article-list request finish; otherwise its late response
+    // can overwrite the stubbed feed inside the likes test
+    cy.wait('@initialArticles')
     cy.deleteTestArticles()                  // remove leftovers of previous runs -> tests stay idempotent
   })
   // it('first', () => {  // #37
@@ -66,6 +70,10 @@ describe('test with backend', () => {
     cy.get('app-article-list button')
       .eq(1)
       .click()
+    // Angular re-renders the feed after the favorite request, so the button must
+    // be re-queried before asserting instead of continuing the old chain
+    cy.get('app-article-list button')
+      .eq(1)
       .should('contain', '6')        // validation
   })
 
@@ -111,9 +119,10 @@ describe('test with backend', () => {
     //     "password": "vd12345"
     //   }
     // }
+    const articleTitle = 'Request from API ' + Date.now() // unique title -> no 422 duplicate title
     const bodyRequest = {
       "article": {
-        "title": "Request from API",
+        "title": articleTitle,
         "description": "API testing is easy",
         "body": "Angular is cool",
         "tagList": []
@@ -134,10 +143,10 @@ describe('test with backend', () => {
         expect(response.status).to.equal(201)
       })
 
-      cy.get('img').click('topRight', { force: true }) // change at #47
+      cy.contains('Global Feed').click() // show the feed containing the created article // #47
       // cy.contains('Global Feed').dblclick() // delete article through UI // #41.2
       cy.get('.article-preview')
-        .contains('.preview-link', 'Request from API')
+        .contains('.preview-link', articleTitle)
         .click()
       cy.get('.article-actions')
         .contains('[class="btn btn-sm btn-outline-danger"]', ' Delete Article ')
@@ -150,8 +159,8 @@ describe('test with backend', () => {
         method: 'GET'
       }).its('body').then(body => {
         // console.log(body)
-        expect(body.articles[0].title)
-          .not.to.equal('Request from API')
+        expect(body.articles.map(article => article.title))
+          .not.to.include(articleTitle)
       })
     })
   })

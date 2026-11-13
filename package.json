@@ -17,7 +17,7 @@
     "cypress:e2e": "npm run prereport && npx cypress run --browser chrome; npm run junit:merge; npm run mochawesome:merge",
     "cy:open_dev": "npx cypress open --env username=pwtest63@test.com,password=vd123456",
     "cy:open_qa": "npx cypress open --env username=pwtest65@test.com,password=vd1234567",
-    "cy:open_process": "npx cypress open --env username=$DB_USERNAME,password=$PASSWORD",
+    "cy:open_process": "npx cypress open",
     "prepare": "husky install"
   },
   "engines": {
