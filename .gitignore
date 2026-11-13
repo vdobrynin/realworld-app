@@ -55,3 +55,12 @@ yarn-error.log
 Thumbs.db
 
 cypress.env.json
+
+scripts/
+
+# local unit tests, not committed
+src/app/core/services/jwt.service.spec.ts
+src/app/shared/components/list-errors.component.spec.ts
+src/app/shared/pipes/markdown.pipe.spec.ts
+
+.husky/

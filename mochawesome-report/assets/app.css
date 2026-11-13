@@ -67,8 +67,8 @@
   --link-color: var(--brand-primary);
   --link-hover-color: color(var(--link-color) shade(15%));
   --list-group-border: #ddd;
-  --font-family-sans-serif: "robotoregular", "Helvetica Neue", Helvetica, Arial,
-    sans-serif;
+  --font-family-sans-serif:
+    "robotoregular", "Helvetica Neue", Helvetica, Arial, sans-serif;
   --font-family-base: var(--font-family-sans-serif);
   --font-family-mono: "Menlo", "Monaco", "Consolas", "Courier New", monospace;
   --font-size-base: 14px;
@@ -253,8 +253,8 @@
   --link-color: var(--brand-primary);
   --link-hover-color: color(var(--link-color) shade(15%));
   --list-group-border: #ddd;
-  --font-family-sans-serif: "robotoregular", "Helvetica Neue", Helvetica, Arial,
-    sans-serif;
+  --font-family-sans-serif:
+    "robotoregular", "Helvetica Neue", Helvetica, Arial, sans-serif;
   --font-family-base: var(--font-family-sans-serif);
   --font-family-mono: "Menlo", "Monaco", "Consolas", "Courier New", monospace;
   --font-size-base: 14px;
@@ -413,8 +413,8 @@
   --link-color: var(--brand-primary);
   --link-hover-color: color(var(--link-color) shade(15%));
   --list-group-border: #ddd;
-  --font-family-sans-serif: "robotoregular", "Helvetica Neue", Helvetica, Arial,
-    sans-serif;
+  --font-family-sans-serif:
+    "robotoregular", "Helvetica Neue", Helvetica, Arial, sans-serif;
   --font-family-base: var(--font-family-sans-serif);
   --font-family-mono: "Menlo", "Monaco", "Consolas", "Courier New", monospace;
   --font-size-base: 14px;
@@ -532,8 +532,8 @@
   --link-color: var(--brand-primary);
   --link-hover-color: color(var(--link-color) shade(15%));
   --list-group-border: #ddd;
-  --font-family-sans-serif: "robotoregular", "Helvetica Neue", Helvetica, Arial,
-    sans-serif;
+  --font-family-sans-serif:
+    "robotoregular", "Helvetica Neue", Helvetica, Arial, sans-serif;
   --font-family-base: var(--font-family-sans-serif);
   --font-family-mono: "Menlo", "Monaco", "Consolas", "Courier New", monospace;
   --font-size-base: 14px;
@@ -691,8 +691,8 @@
   --link-color: var(--brand-primary);
   --link-hover-color: color(var(--link-color) shade(15%));
   --list-group-border: #ddd;
-  --font-family-sans-serif: "robotoregular", "Helvetica Neue", Helvetica, Arial,
-    sans-serif;
+  --font-family-sans-serif:
+    "robotoregular", "Helvetica Neue", Helvetica, Arial, sans-serif;
   --font-family-base: var(--font-family-sans-serif);
   --font-family-mono: "Menlo", "Monaco", "Consolas", "Courier New", monospace;
   --font-size-base: 14px;
@@ -1163,8 +1163,8 @@ template {
   --link-color: var(--brand-primary);
   --link-hover-color: color(var(--link-color) shade(15%));
   --list-group-border: #ddd;
-  --font-family-sans-serif: "robotoregular", "Helvetica Neue", Helvetica, Arial,
-    sans-serif;
+  --font-family-sans-serif:
+    "robotoregular", "Helvetica Neue", Helvetica, Arial, sans-serif;
   --font-family-base: var(--font-family-sans-serif);
   --font-family-mono: "Menlo", "Monaco", "Consolas", "Courier New", monospace;
   --font-size-base: 14px;
@@ -2424,8 +2424,8 @@ pre {
   --link-color: var(--brand-primary);
   --link-hover-color: color(var(--link-color) shade(15%));
   --list-group-border: #ddd;
-  --font-family-sans-serif: "robotoregular", "Helvetica Neue", Helvetica, Arial,
-    sans-serif;
+  --font-family-sans-serif:
+    "robotoregular", "Helvetica Neue", Helvetica, Arial, sans-serif;
   --font-family-base: var(--font-family-sans-serif);
   --font-family-mono: "Menlo", "Monaco", "Consolas", "Courier New", monospace;
   --font-size-base: 14px;
@@ -2636,8 +2636,8 @@ pre {
   --link-color: var(--brand-primary);
   --link-hover-color: color(var(--link-color) shade(15%));
   --list-group-border: #ddd;
-  --font-family-sans-serif: "robotoregular", "Helvetica Neue", Helvetica, Arial,
-    sans-serif;
+  --font-family-sans-serif:
+    "robotoregular", "Helvetica Neue", Helvetica, Arial, sans-serif;
   --font-family-base: var(--font-family-sans-serif);
   --font-family-mono: "Menlo", "Monaco", "Consolas", "Courier New", monospace;
   --font-size-base: 14px;
@@ -2917,8 +2917,8 @@ pre {
   --link-color: var(--brand-primary);
   --link-hover-color: color(var(--link-color) shade(15%));
   --list-group-border: #ddd;
-  --font-family-sans-serif: "robotoregular", "Helvetica Neue", Helvetica, Arial,
-    sans-serif;
+  --font-family-sans-serif:
+    "robotoregular", "Helvetica Neue", Helvetica, Arial, sans-serif;
   --font-family-base: var(--font-family-sans-serif);
   --font-family-mono: "Menlo", "Monaco", "Consolas", "Courier New", monospace;
   --font-size-base: 14px;
@@ -3060,8 +3060,8 @@ pre {
   --link-color: var(--brand-primary);
   --link-hover-color: color(var(--link-color) shade(15%));
   --list-group-border: #ddd;
-  --font-family-sans-serif: "robotoregular", "Helvetica Neue", Helvetica, Arial,
-    sans-serif;
+  --font-family-sans-serif:
+    "robotoregular", "Helvetica Neue", Helvetica, Arial, sans-serif;
   --font-family-base: var(--font-family-sans-serif);
   --font-family-mono: "Menlo", "Monaco", "Consolas", "Courier New", monospace;
   --font-size-base: 14px;
@@ -3440,8 +3440,8 @@ pre {
   --link-color: var(--brand-primary);
   --link-hover-color: color(var(--link-color) shade(15%));
   --list-group-border: #ddd;
-  --font-family-sans-serif: "robotoregular", "Helvetica Neue", Helvetica, Arial,
-    sans-serif;
+  --font-family-sans-serif:
+    "robotoregular", "Helvetica Neue", Helvetica, Arial, sans-serif;
   --font-family-base: var(--font-family-sans-serif);
   --font-family-mono: "Menlo", "Monaco", "Consolas", "Courier New", monospace;
   --font-size-base: 14px;
@@ -3688,8 +3688,8 @@ pre {
   --link-color: var(--brand-primary);
   --link-hover-color: color(var(--link-color) shade(15%));
   --list-group-border: #ddd;
-  --font-family-sans-serif: "robotoregular", "Helvetica Neue", Helvetica, Arial,
-    sans-serif;
+  --font-family-sans-serif:
+    "robotoregular", "Helvetica Neue", Helvetica, Arial, sans-serif;
   --font-family-base: var(--font-family-sans-serif);
   --font-family-mono: "Menlo", "Monaco", "Consolas", "Courier New", monospace;
   --font-size-base: 14px;
@@ -3838,8 +3838,8 @@ pre {
   --link-color: var(--brand-primary);
   --link-hover-color: color(var(--link-color) shade(15%));
   --list-group-border: #ddd;
-  --font-family-sans-serif: "robotoregular", "Helvetica Neue", Helvetica, Arial,
-    sans-serif;
+  --font-family-sans-serif:
+    "robotoregular", "Helvetica Neue", Helvetica, Arial, sans-serif;
   --font-family-base: var(--font-family-sans-serif);
   --font-family-mono: "Menlo", "Monaco", "Consolas", "Courier New", monospace;
   --font-size-base: 14px;

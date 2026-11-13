@@ -5,24 +5,21 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build --prod --base-href ./ && cp CNAME dist/CNAME",
-    "test": "ng test",
-    "lint": "ng lint --force",
+    "build": "ng build --configuration production --base-href ./",
+    "test": "ng test --watch=false --browsers=ChromeHeadless",
+    "lint": "tsc --noEmit -p tsconfig.app.json",
     "e2e": "ng e2e",
     "delete:reports": "rm -r cypress/results/* || true",
     "prereport": "npm run delete:reports",
     "mochawesome:merge": "npx mochawesome-merge \"cypress/results/mochawesome/*.json\" > mochawesome.json && npx marge mochawesome.json",
     "junit:merge": "npx junit-merge -d cypress/results/junit -o cypress/results/junit/result.xml",
-    "cypress:run": "npm run prereport && npx cypress run",
-    "cypress:e2e": "start-test start http-get://localhost:4200 cypress:run; npm run junit:merge; npm run mochawesome:merge",
+    "cypress:run": "npm run prereport && npx cypress run --browser chrome",
+    "cypress:e2e": "npm run prereport && npx cypress run --browser chrome; npm run junit:merge; npm run mochawesome:merge",
     "cy:open_dev": "npx cypress open --env username=pwtest63@test.com,password=vd123456",
     "cy:open_qa": "npx cypress open --env username=pwtest65@test.com,password=vd1234567",
     "cy:open_process": "npx cypress open --env username=$DB_USERNAME,password=$PASSWORD",
     "prepare": "husky install"
   },
-  "pre-commit": [
-    "lint"
-  ],
   "engines": {
     "node": "^18.13.0 || ^20.9.0"
   },
@@ -39,8 +36,6 @@
     "@rx-angular/cdk": "17.0.0",
     "@rx-angular/template": "17.0.0",
     "marked": "^11.2.0",
-    "npm-check": "^6.0.1",
-    "react-scripts": "^5.0.1",
     "rxjs": "^7.8.2",
     "tslib": "^2.8.1",
     "zone.js": "^0.14.10"
@@ -51,10 +46,9 @@
     "@angular/compiler-cli": "17.0.7",
     "@cypress/schematic": "^2.5.2",
     "@types/jasmine": "~4.3.0",
-    "@types/marked": "^6.0.0",
     "autoprefixer": "^10.4.21",
     "browserslist": "^4.24.4",
-    "cypress": "^15.10.0",
+    "cypress": "^16.3.0",
     "cypress-multi-reporters": "^1.6.4",
     "husky": "^8.0.3",
     "jasmine-core": "~4.5.0",

@@ -37,22 +37,46 @@ Cypress.Commands.add('loginToApplication', () => {
     // cy.get('[placeholder="Email"]').type('pwtest60@test.com')
     // cy.get('[placeholder="Password"]').type('vd12345')
     // cy.get('form').submit()
-    const userCredentials = {   // headless authorization #42
-        "user": {
-            // "email": "pwtest60@test.com",              // #42
-            // "password": "vd12345"                      // #45.1                     
-            "email": Cypress.env("username"),        // #45.1
-            "password": Cypress.env("password")      // #45.1
+    // #45.1 Cypress 15: read sensitive values with cy.env() instead of Cypress.env()
+    cy.env(['username', 'password']).then(({ username, password }) => {
+        const userCredentials = {   // headless authorization #42
+            "user": {
+                // "email": "pwtest60@test.com",              // #42
+                // "password": "vd12345"                      // #45.1                     
+                "email": username,        // #45.1
+                "password": password      // #45.1
+            }
         }
-    }
-    cy.request('POST', Cypress.env('apiUrl') + '/api/users/login', userCredentials) // #45
-        .its('body').then(body => {
-            const token = body.user.token
-            cy.wrap(token).as('token')          // save in #42
-            cy.visit('/', {
-                onBeforeLoad(win) {
-                    win.localStorage.setItem('jwtToken', token)
-                }
+        cy.request('POST', Cypress.expose('apiUrl') + '/api/users/login', userCredentials) // #45
+            .its('body').then(body => {
+                const token = body.user.token
+                cy.wrap(token).as('token')          // save in #42
+                cy.wrap(body.user.username).as('username')
+                cy.visit('/', {
+                    onBeforeLoad(win) {
+                        win.localStorage.setItem('jwtToken', token)
+                    }
+                })
             })
-        })
+    })
+})
+
+Cypress.Commands.add('deleteTestArticles', () => {
+    // API cleanup: remove articles left behind by previous failed/crashed runs,
+    // so tests that create articles are idempotent (avoids 422 "title must be unique")
+    cy.get('@token').then(token =>
+        cy.get('@username').then(username =>
+            cy.request({
+                url: Cypress.expose('apiUrl') + '/api/articles?author=' + username + '&limit=100',
+                headers: { 'Authorization': 'Token ' + token },
+                method: 'GET'
+            }).its('body.articles').each(article => {
+                cy.request({
+                    url: Cypress.expose('apiUrl') + '/api/articles/' + article.slug,
+                    headers: { 'Authorization': 'Token ' + token },
+                    method: 'DELETE'
+                })
+            })
+        )
+    )
 })

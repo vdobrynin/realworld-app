@@ -5,6 +5,7 @@ describe('test with backend', () => {
     // cy.intercept('GET', '**/tags', { fixture: 'tags.json' })               //#40
     cy.intercept({ method: 'GET', path: 'tags' }, { fixture: 'tags.json' })   //#40.1
     cy.loginToApplication()                  //lecture #37
+    cy.deleteTestArticles()                  // remove leftovers of previous runs -> tests stay idempotent
   })
   // it('first', () => {  // #37
   //   cy.log('Yaaay we logged in')
@@ -124,7 +125,7 @@ describe('test with backend', () => {
     cy.get('@token').then(token => {                           // 1st request change in #42
       // const token = body.user.token                      //we do no need it in #42
       cy.request({                                                    // 2nd request #41.1 & #42
-        url: Cypress.env('apiUrl') + '/api/articles/',           // #45.2
+        url: Cypress.expose('apiUrl') + '/api/articles/',        // #45.2
         // url: 'https://conduit-api.bondaracademy.com/api/articles/',
         headers: { 'Authorization': 'Token ' + token },
         method: 'POST',
@@ -143,7 +144,7 @@ describe('test with backend', () => {
         .click()            //using 2nd option to delete 2nd article 
 
       cy.request({                                                       // #41.3
-        url: Cypress.env('apiUrl') + '/api/articles?limit=10&offset=0',       // #45.2
+        url: Cypress.expose('apiUrl') + '/api/articles?limit=10&offset=0',       // #45.2
         // url: 'https://conduit-api.bondaracademy.com/api/articles?limit=10&offset=0',
         headers: { 'Authorization': 'Token ' + token },
         method: 'GET'

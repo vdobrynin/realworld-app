@@ -24,7 +24,7 @@
               <a
                 class="nav-link"
                 [ngClass]="{
-                  active: listConfig.type === 'all' && !listConfig.filters.tag
+                  active: listConfig.type === 'all' && !listConfig.filters.tag,
                 }"
                 (click)="setListTo('all')"
               >

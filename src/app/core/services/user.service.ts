@@ -19,7 +19,7 @@ export class UserService {
   constructor(
     private readonly http: HttpClient,
     private readonly jwtService: JwtService,
-    private readonly router: Router
+    private readonly router: Router,
   ) {}
 
   login(credentials: {
@@ -52,7 +52,7 @@ export class UserService {
         next: ({ user }) => this.setAuth(user),
         error: () => this.purgeAuth(),
       }),
-      shareReplay(1)
+      shareReplay(1),
     );
   }
 
@@ -60,7 +60,7 @@ export class UserService {
     return this.http.put<{ user: User }>("/user", { user }).pipe(
       tap(({ user }) => {
         this.currentUserSubject.next(user);
-      })
+      }),
     );
   }
 

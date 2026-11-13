@@ -23,7 +23,7 @@ import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
       [ngClass]="{
         disabled: isSubmitting,
         'btn-outline-secondary': !profile.following,
-        'btn-secondary': profile.following
+        'btn-secondary': profile.following,
       }"
       (click)="toggleFollowing()"
     >
