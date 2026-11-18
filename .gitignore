@@ -64,3 +64,9 @@ src/app/shared/components/list-errors.component.spec.ts
 src/app/shared/pipes/markdown.pipe.spec.ts
 
 .husky/
+
+.superpowers/
+
+.angular/
+
+docs/
